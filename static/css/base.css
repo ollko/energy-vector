@@ -1,0 +1,31 @@
+#main{
+	margin-top: 50px;
+}
+
+.navbar-brand{
+	padding: 5px;
+}
+.navbar-brand:hover{
+	opacity:0.75;
+}
+
+#footer{
+	
+	width: 100%;
+	padding: 50px;
+	color: #999;
+	background-color: #f4f4f4;
+}
+#main{
+	padding-bottom: 50px;
+}
+.contacts-flatpage{
+	padding: 50px 0;
+}
+
+/*-----СРО*/
+.grey-doc-sro-border{
+	outline:  1px solid #CCCCCC;
+	box-shadow:  3px 3px  3px #CCCCCC;
+}
+/*-----/СРО*/

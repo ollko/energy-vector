@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head>
+		{% block meta_tags %}
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta lang="ru">
+			<meta name="yandex-verification" content="" />
+		{% endblock %}
+		
+		{% block stylesheet %}
+			<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+			<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+			<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+			<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
+		{% endblock %}
+			<title>
+		{% block title %}Дизельгенераторы, ИБП, продажа, монтаж, ремонт и техническое обслуживание.{% endblock %}			
+			</title>
+
+		{% comment %}
+			{% block analitics %}
+				<script type="text/javascript" src="{% static 'js/analitics/y-metrika.js'%}"></script>	
+				<noscript><div><img src="https://mc.yandex.ru/watch/42212789" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+			{% endblock %}
+		{% endcomment %}
+	</head>
+
+<body>
+	<header>
+		{% block navigation %}
+			<nav class="navbar navbar-default navbar-fixed-top">
+
+				{% include "includes/_nav_bs.html" %}
+		
+			</nav>
+		{% endblock %}
+
+		{% block bluetop %}
+			{% include "includes/_title_top.html" %}
+		{% endblock %}
+
+	</header>
+	<div id="main" role="main">
+            
+                {% block content %}
+                {% endblock %}
+            
+	</div>
+
+	<div id="footer" >
+		<div class="container">
+			<div class="row">
+				<div class="col-md-1">
+
+							{% include "includes/_authen.html" %}
+
+				</div>
+				<div class="col-md-11">
+				© 2011-2017 ООО «Вектор». Все права защищены.
+				<br> Копирование материалов сайта запрещено.
+				</div>
+				
+			</div>
+		</div>
+		
+			
+		
+	</div>
+		
+		{% block javascript %}
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>			
+			<script type="text/javascript" src="{% static 'js/base.js'%}"></script>				
+			<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>	
+		{% endblock %}
+		
+		
+		
+		
+</body>
+
+</html>
