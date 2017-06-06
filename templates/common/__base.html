@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <html>
-	<head>
+ 
+	<head prefix="my_namespace: http://ogp.me/ns/website#">
 		{% block meta_tags %}
 			<meta charset="utf-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta lang="ru">
 			<meta name="yandex-verification" content="" />
+			<meta property="og:type" content="website">
+			<meta property="og:title" content="ООО ВЕКТОР"/>
+			<meta property="og:description" content="Дизельгенераторы и ИБП. Продажа, установка, ремонт и техобслуживание"/>
+			<meta property="og:image" content="http://localhost:8000/media/certificates/%D0%A1%D0%B5%D1%80%D1%82_%D0%B1%D0%B5%D0%B7_%D0%BE%D1%80%D0%B3_%D0%91%D0%B5%D0%BB%D1%8B%D0%B9_%D0%9B%D1%8B%D1%81%D0%B5%D0%BD%D0%BA%D0%BE_2x.png">
+			<meta property="og:url" content= "http://www.energy-vector.ru" />
 		{% endblock %}
 		
 		{% block stylesheet %}
 			<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 			<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 			<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 			<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
 		{% endblock %}
@@ -31,15 +38,18 @@
 <body>
 	<header>
 		{% block navigation %}
-			<nav class="navbar navbar-default navbar-fixed-top">
+			
 
 				{% include "includes/_nav_bs.html" %}
 		
-			</nav>
+			
 		{% endblock %}
 
-		{% block bluetop %}
-			{% include "includes/_title_top.html" %}
+		{% block greytop %}
+			{% include "includes/_grey_top.html" %}
+		{% endblock %}
+
+		{% block slider %}
 		{% endblock %}
 
 	</header>
@@ -71,9 +81,11 @@
 	</div>
 		
 		{% block javascript %}
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>			
+			<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>			
 			<script type="text/javascript" src="{% static 'js/base.js'%}"></script>				
-			<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>	
+			<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+			
+
 		{% endblock %}
 		
 		

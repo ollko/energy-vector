@@ -1,0 +1,21 @@
+{% extends "common/__l_single_col.html" %}
+
+{% block content %}
+
+<div class='form'>
+	<div class="enter-container">	
+		<h3>ДОБАВЬТЕ НОВЫЙ ОТЗЫВ</h3>
+	</div>
+	
+	<form enctype="{{enctype_atr}}" action="{{action_atr}}" method="post">
+{% csrf_token %}
+	<!-- <table class="form"> -->
+		{{ form.as_table }}
+	<!-- </table> -->
+	
+	<input type="submit" value="{{value}}">
+	<!-- <input type="hidden" name="next" value="{{ next }}"> -->
+</form>
+</div>
+
+{% endblock %}

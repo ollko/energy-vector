@@ -3,48 +3,58 @@
 
 {% block stylesheet %}
 	{{ block.super }}
-	<link rel="stylesheet" type="text/css" href="{% static 'fancybox/css/jquery.fancybox.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fancybox/jquery.fancybox.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="container">
-	<div class="row"><h3>СРО на проектные работы:</h3></div>
-<div class="row">
-	<div class="col-md-3 col-sm-12">
-		<a href="{% static 'images/sro/project/svidetelstvo_proect_800.png' %}" data-fancybox="sro-group" data-caption="Свидетельство СРО о допуске к работам по проектированию">
-			<img class='grey-doc-sro-border' src="{% static 'images/sro/project/thumbnail/svidetelstvo_proect_800.png' %}" alt="Свидетельство СРО о допуске к работам по проектированию" />
-		</a>
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<h3 class="sro-title"><strong>СРО на проектные работы:</strong></h3>
+			<br>
+		</div>
 	</div>
-	<div class="col-md-3 col-sm-12">
-		<a href="{% static 'images/sro/project/p1.png' %}" data-fancybox="sro-group" data-caption="стр.1">
-			<img class='grey-doc-sro-border' src="{% static 'images/sro/project/thumbnail/p1.png' %}" alt="страница 1 к свидетельству СРО о допуске к работам по проектированию" />
-		</a>
-	</div>
-	<div class="col-md-3 col-sm-12">
-		<a href="{% static 'images/sro/project/p2.png' %}" data-fancybox="sro-group" data-caption="стр.2">
-			<img class='grey-doc-sro-border' src="{% static 'images/sro/project/thumbnail/p2.png' %}" alt="страница 2 к свидетельству СРО о допуске к работам по проектированию" />
-		</a>
-	</div>
-</div>
-	<div class="row"><h3>СРО на строительные работы:</h3></div>	
 	<div class="row">
 		<div class="col-md-3 col-sm-12">
-			<a href="{% static 'images/sro/construction/svidetelstvo_constr.png' %}" data-fancybox="sro-group" data-caption="Свидетельство СРО о допуске к строительным работам">
+			<a href="{% static 'images/sro/project/svidetelstvo_proect_800.png' %}" class="fancyimage" data-fancybox-group="group"  data-caption="Свидетельство СРО о допуске к работам по проектированию">
+				<img class='grey-doc-sro-border' src="{% static 'images/sro/project/thumbnail/svidetelstvo_proect_800.png' %}" alt="Свидетельство СРО о допуске к работам по проектированию" />
+			</a>
+		</div>
+		<div class="col-md-3 col-sm-12">
+			<a href="{% static 'images/sro/project/p1.png' %}" class="fancyimage" data-fancybox-group="group" <img class='grey-doc-sro-border' src="{% static 'images/sro/project/thumbnail/p1.png' %}" alt="страница 1 к свидетельству СРО о допуске к работам по проектированию" />
+			<img class='grey-doc-sro-border' src="{% static 'images/sro/project/thumbnail/p1.png' %}" alt="Свидетельство СРО о допуске к работам по проектированию" />
+			</a>
+		</div>
+		<div class="col-md-3 col-sm-12">
+			<a href="{% static 'images/sro/project/p2.png' %}" data-fancybox-group="group" <img class='grey-doc-sro-border' src="{% static 'images/sro/project/thumbnail/p2.png' %}" alt="страница 2 к свидетельству СРО о допуске к работам по проектированию" />
+			<img class='grey-doc-sro-border' src="{% static 'images/sro/project/thumbnail/p2.png' %}" alt="Свидетельство СРО о допуске к работам по проектированию" />
+			</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<h3 class="sro-title"><strong>СРО на строительные работы:</strong></h3>
+			<br>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-md-3 col-sm-12">
+			<a href="{% static 'images/sro/construction/svidetelstvo_constr.png' %}" class="fancyimage" data-fancybox-group="group"  data-caption="Свидетельство СРО о допуске к строительным работам">
 				<img class='grey-doc-sro-border' src="{% static 'images/sro/construction/thumbnail/svidetelstvo_constr.png' %}" alt="Свидетельство СРО о допуске к строительным работам" />
 			</a>
 		</div>
 		<div class="col-md-3 col-sm-12">
-			<a href="{% static 'images/sro/construction/p1.png' %}" data-fancybox="sro-group" data-caption="стр.1">
+			<a href="{% static 'images/sro/construction/p1.png' %}" class="fancyimage" data-fancybox-group="group"  data-caption="стр.1">
 				<img class='grey-doc-sro-border' src="{% static 'images/sro/construction/thumbnail/p1.png' %}" alt="страница 1 к свидетельству СРО о допуске к строительным работам" />
 			</a>
 		</div>
 		<div class="col-md-3 col-sm-12">
-			<a href="{% static 'images/sro/construction/p2.png' %}" data-fancybox="sro-group" data-caption="стр.2">
+			<a href="{% static 'images/sro/construction/p2.png' %}" class="fancyimage" data-fancybox-group="group"  data-caption="стр.2">
 				<img class='grey-doc-sro-border' src="{% static 'images/sro/construction/thumbnail/p2.png' %}" alt="страница 2 к свидетельству СРО о допуске к строительным работам" />
 			</a>
 		</div>
 		<div class="col-md-3 col-sm-12">
-			<a href="{% static 'images/sro/construction/p3.png' %}" data-fancybox="sro-group" data-caption="стр.2">
+			<a href="{% static 'images/sro/construction/p3.png' %}" class="fancyimage" data-fancybox-group="group"  data-caption="стр.2">
 				<img class='grey-doc-sro-border' src="{% static 'images/sro/construction/thumbnail/p3.png' %}" alt="страница 3 к свидетельству СРО о допуске к строительным работам" />
 			</a>
 		</div>
@@ -52,12 +62,12 @@
 	<br>
 	<div class="row">
 		<div class="col-md-3 col-sm-12">
-			<a href="{% static 'images/sro/construction/p4.png' %}" data-fancybox="sro-group" data-caption="стр.1">
+			<a href="{% static 'images/sro/construction/p4.png' %}" class="fancyimage" data-fancybox-group="group"  data-caption="стр.1">
 				<img class='grey-doc-sro-border' src="{% static 'images/sro/construction/thumbnail/p4.png' %}" alt="страница 4 к свидетельству СРО о допуске к строительным работам" />
 			</a>
 		</div>
 		<div class="col-md-3 col-sm-12">
-			<a href="{% static 'iimages/sro/construction/p5.png' %}" data-fancybox="sro-group" data-caption="стр.2">
+			<a href="{% static 'iimages/sro/construction/p5.png' %}" class="fancyimage" data-fancybox-group="group"  data-caption="стр.2">
 				<img class='grey-doc-sro-border' src="{% static 'images/sro/construction/thumbnail/p5.png' %}" alt="страница 5 к свидетельству СРО о допуске к строительным работам" />
 			</a>
 		</div>
@@ -69,5 +79,6 @@
 
 {% block javascript %}
 	{{ block.super }}
-	<script src="{% static 'fancybox/js/jquery.fancybox.min.js' %}"></script>
+	<script type="text/javascript" src = "{% static 'fancybox/jquery.fancybox.pack.js' %}"></script>
+	<script type="text/javascript" src = "{% static 'js/certificate.js' %}"></script>
 {% endblock %}

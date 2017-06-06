@@ -1,0 +1,67 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+
+{% block meta_tags %}
+	{{ block.super }}
+	<meta property="og:title" content="ООО ВЕКТОР"/>
+	<meta property="og:description" content="Дизельгенераторы и ИБП. Продажа, установка, ремонт и техобслуживание"/>
+	<meta property="og:image" content="{% static 'images/vektor_logo_175x32.png' %}">
+	<meta property="og:type" content="profile"/>
+	<meta property="og:url" content= "http://www.energy-vector.ru" />
+{% endblock %}
+
+{% block title %}
+ООО "ВЕКТОР". Контакты
+{% endblock %}
+
+{% block content %}
+	
+	<div class="container vcard contacts-page">
+	<div class="row ">
+		<div class="col-xs-12 col-md-12 wrapper">
+			<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,whatsapp,telegram" data-url="http://www.energy-vector.ru" data-image="{% static 'images/vektor_logo_175x32.png' %}" data-description = 'Дизельгенераторы, ИБП. Продажа, монтаж, ремонт и техническое обслуживание'></div>
+		</div>	
+	</div>
+	
+	<div class="row ">
+		<div class="col-xs-12 col-md-6">
+			<h4><strong><span class='fn org'>OOO «Вектор»</span></strong></h4>
+			<p>ОГРН 1107746287901</p>
+
+			<h4><strong>Наш адрес:</strong></h4>
+			<div class='adr'>
+				<p><span class='region'>Московская область,</span><br>
+				<span class = 'locality'>Солнечногрский район, деревня Черная Грязь,</span><br>
+				<span class='street-address'>улица Сходненская, 65</span></p>
+
+			</div>
+			<div class="geo">
+				<abbr class="latitude" title="55.972250"></abbr> 
+				<abbr class="longitude" title="37.312891"></abbr>
+			</div>
+			<div>Мы работаем 
+				<span class="workhours">пн-пт 9:00-18:00</span>
+			</div>
+			
+			<p> <span class='tel'>+7 (495) 764-72-08</span><span class='tel'> +7 (985) 266-08-90,</span ><br>
+			<span class='tel'>+7(910)701-11-00</span></p>
+			<h4><strong>Региональные представительства:</strong></h4>
+			<p><strong>Поволжье:</strong>  8(8452)25 06 60, 8 (927) 109 69 00<br>
+			<strong>Юг:</strong> 8 (985) 764-72-08<br>
+			<strong>Урал:</strong> 8 (985) 764-72-08<br>
+			<strong>Сибирь:</strong> 8 (985) 764-72-08</p>
+			<div class="email">
+					<a href="mailto:#">info@energy-vector.ru</a>
+			</div>
+			<div class="url"><a href="http://www.energy-vector.ru">www.energy-vector.ru</a>
+			</div>
+			
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ae1b9abd00d73ee469d2ace978e2fcfe62f239f1ed41fa730554e4dd1614bf1cb&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+		</div>
+		
+	</div>
+	
+</div>
+{% endblock %}

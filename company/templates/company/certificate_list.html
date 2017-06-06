@@ -1,0 +1,40 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+
+{% block stylesheet %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'mosaicflow/mosaicflow.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fancybox/jquery.fancybox.css' %}">
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+	<div class="row">
+		{% if user.is_authenticated %}
+		  {% if perms.company.add_certificate %}
+		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'company:certificates_new' %}" title="добавить сертификаты"><span class="glyphicon glyphicon-plus">добавить сертификаты</span></a></div>
+			{% endif %}
+		{% endif %}	
+	</div>
+
+	<br>
+	<div class="clearfix mosaicflow">
+		{% for item in object_list %}
+		<div class="mosaicflow__item">
+			<a class="fancyimage" data-fancybox-group="group" title="{{item.certificate}}" href="{{item.certificate_2x.url}}">
+				<img src="{{item.certificate_1x.url}}" alt="{{item.certificate}}">
+			</a>
+		</div>
+		{% endfor %}
+
+	</div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+	{{ block.super }}
+	<script type="text/javascript" src = "{% static 'fancybox/jquery.fancybox.pack.js' %}"></script>
+	<script src="{% static 'mosaicflow/jquery.mosaicflow.min.js' %}"></script>	
+	<script type="text/javascript" src = "{% static 'js/certificate.js' %}"></script>
+{% endblock %}
