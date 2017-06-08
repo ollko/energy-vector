@@ -33,7 +33,7 @@ def send_email(request):
 			question = form.cleaned_data['question']
             
 			if name and phone_number:
-				send_mail(u'Заявка на обратный звонок', question, 'admin@example.com',
+				send_mail(u'Заявка на обратный звонок', question, 'korotkaya.olga@yandex.ru',
 						    ['korotkaya.olga@yandex.ru'], fail_silently=False)
 				# redirect to a new URL:
 				return HttpResponseRedirect('/')	
