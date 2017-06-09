@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Django settings for energy_vector project.
 
@@ -16,11 +17,9 @@ from .local_settings import *
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '7y2=pkfwci2xou2f#q3#mthtg^3yf+p+4x1@b_$$o4h!^t&bv('
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+
 
 ALLOWED_HOSTS = []
 
@@ -108,12 +107,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
+# для статических файлов , расположенных в папках /static/ приложений
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+# для статических файлов (общих для всех приложений) в корневой папке проекта
 
-]
 
 
 # for files uploading:
