@@ -116,6 +116,7 @@ STATIC_URL = '/static/'
 # for files uploading:
 
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')
 
 LOGIN_URL='company:login'
 LOGOUT_URL='company:logout'

@@ -43,13 +43,6 @@ class CertificateList(ListView):
     model = Certificate
 
 
-# class OtzivList(ListView):
-#     model = Otziv
-#     def get_context_data(self,**kwards):
-#     	context=super(OtzivList,self).get_context_data(**kwards)
-#     	context[]
-
-
 def otzivList(request):
 	'''выводит страницу с отзывами о работе компании'''
 	otzivs=Otziv.objects.all()
