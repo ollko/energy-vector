@@ -108,6 +108,9 @@ div.form, div.thanks{
 	/*outline:  1px solid #CCCBCB;*/
 
 }
+.grey-form-block{
+	background-color: #DDDDDD;
+}
 .form {
 	outline:  1px solid #CCCBCB;
 	width: 400px;
