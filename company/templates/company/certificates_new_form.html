@@ -10,15 +10,17 @@
 	
 	<form enctype="{{enctype_atr}}" action="{% url 'company:certificates_new' %}" method="post">
 		{% csrf_token %}
-		<div class="enter-container text-center">
-			
-			{{ form}}
+			<p class="text-center">Можно загрузить: JPEG,PNG,GIF,TIF</p>
+			<p class="text-center"><b>PDF НЕ ПОДДЕРЖИВАЕТСЯ!</b></p>
+		
+		<div class="enter-container ">	
+			{{ form.as_p}}
 
 		</div>
 					
 		<div class="button-container text-center grey-form-block">
 			
-				<input class="btn btn-default" type="submit" value="{{value}}">
+				<input class="btn btn-default" type="submit" value="ДОБАВИТЬ">
 			
 		<!-- <input type="hidden" name="next" value="{{ next }}"> -->
 		</div>

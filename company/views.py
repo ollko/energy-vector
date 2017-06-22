@@ -27,7 +27,7 @@ def send_email(request):
 		# check whether it's valid:
 		if form.is_valid():
             # process the data in form.cleaned_data as required
-			print 'form.cleaned_data= ',form.cleaned_data
+			# print 'form.cleaned_data= ',form.cleaned_data
 			name = form.cleaned_data['name']
 			phone_number = form.cleaned_data['phone_number']
 			question = form.cleaned_data['question']
@@ -66,10 +66,10 @@ def otzivList(request):
 def certificates_new(request):
 	# if this is a POST request we need to process the form data
 	if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-		form = CertificateForm(request.FILES)
+		# create a form instance and populate it with data from the request:
+		form = CertificateForm(request.POST, request.FILES)
 		
-		# if form.is_valid():
+		if form.is_valid():
 		# 	# process the data in form.cleaned_data as required
 		# 	marka_new = form.cleaned_data['marka_new']
 		# 	if marka_new:
@@ -82,26 +82,27 @@ def certificates_new(request):
 		# 			m.save()
 		# 		else:
 		# 			pass
-
-
-		certificates = request.FILES
-		
-		i=len(certificates.getlist('certificate'))-1
-		
-		while i>=0:
-
-			certificate = certificates.getlist('certificate')[i]
 			
-			c = Certificate( certificate = certificate)
-
-			c.save()
-
-			c.certificate_1x_2x()
+			# if form.is_valid():
+				
+			certificates = request.FILES
 			
-			c.save()
-			i=i-1			
+			i=len(certificates.getlist('certificate'))-1
+			
+			while i>=0:
 
-		return HttpResponseRedirect('/certificates/')
+				certificate = certificates.getlist('certificate')[i]
+				
+				c = Certificate( certificate = certificate)
+
+				c.save()
+
+				c.certificate_1x_2x()
+				
+				c.save()
+				i=i-1			
+
+			return HttpResponseRedirect('/certificates/')
     # if a GET (or any other method) we'll create a blank form
 	else:
 		form = CertificateForm()

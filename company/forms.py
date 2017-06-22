@@ -2,48 +2,30 @@
 from django import forms
 
 from .widgets import MultiFileInput, PhoneField
-from .models import Callorderuser,Marka
+from .models import Callorderuser, Marka, Certificate
 # from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth.models import User
 
+from django.core.exceptions import ValidationError
+
+# def validate_images_format(file_instance):
+
+# 	if file_instance.content_type=='image/jpeg':
+# 		print 'file_instance.content_type=',file_instance.content_type
+		
+# 		raise ValidationError("Файл в 'jpeg' формате нельзя загрузить на сайт!")
 
 
 class CertificateForm(forms.Form):
 
-	# def get_choice_marka_list():
-	# 	'''
-	# 	возвращает список кортежиков типа [(1,марка1),(2,марка2)...]
-	# 	'''
-	# 	m = Marka.objects.all()
-	# 	l=[]
-	# 	for i in m:
-	# 		l.append(i.marka)
-	# 	choice_list= [ i for i in l ]
-	# 	print 'choice_list=',choice_list
-	# 	return choice_list		
-    
-	# # marka = forms.CharField(label=u'марка оборудования', max_length=20)
-	# marka_choice_fild = forms.ChoiceField(widget = forms.Select(), 
- #                 choices = (get_choice_marka_list()), )
-	# marka_new = forms.CharField(label=u'ВЫБЕРИТЕ МАРКУ СЕРТИФИКАТА', max_length = 20,)
-	# class Meta:
-	# 	model = Marka
-	# 	fields = ('marka')
-
-	certificate = forms.ImageField(label=u'', widget = MultiFileInput)
-	
-
-	
-# class RegistrationForm(UserCreationForm):
-# 	class Meta:
-# 		model = User
-# 		fields = ('first_name','last_name','email')
+	certificate = forms.ImageField(label=u'', widget = MultiFileInput,
+					# validators = [validate_images_format]
+					)
 
 class OtzivForm(forms.Form):
 	
-	otziv = forms.ImageField(label=u'',)
-	text = forms.CharField(label=u'наберите кратко текст отзыва:',
-				 max_length = 1000,widget = forms.widgets.Textarea)
+	otziv = forms.ImageField(label=u'PDF не поддерживается!',)
+	text = forms.CharField(label=u'НАБЕРИТЕ КРАТКО ТЕКСТ ОТЗЫВА',max_length = 1000,widget = forms.widgets.Textarea)
 			
 class Callorder(forms.Form):
 

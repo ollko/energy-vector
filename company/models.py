@@ -25,15 +25,15 @@ def img_convert(img_file_path, size):
 
 	fil, ext = os.path.splitext(tail)
 
-	right_ext = ('jpg','jpeg','JPG','JPEG')
+	right_ext = ('.jpg','.jpeg','.JPG','.JPEG')
 	# создаем PIL объект:
 	img = PIL.Image.open(img_file_path)
-
+	new_path=None
 	# Если для загрузки выбран файл не в JPG формате, преобразуем его в JPG:	
 	if not ext in right_ext:		
-		new_path=head+'/'+fil+'.jpg'
+		new_path=BASE_DIR+'/tmp/'+fil+'.jpeg'
 		
-		# конвертируем в JPG:
+		# конвертируем в JPEG:
 		img.save(new_path)
 		# создаем PIL объект в JPG формате:
 		img = PIL.Image.open(new_path)
@@ -60,16 +60,14 @@ def img_convert(img_file_path, size):
 		#  создаем new Django file-like object, чтобы впоследствии запомнить его в 
 		# ImageFild поле модели
 
-		foto_copy_file = InMemoryUploadedFile(foto_copy_io, None, fil+item[1]+'.jpg', 'image/jpg',
+		foto_copy_file = InMemoryUploadedFile(foto_copy_io, None, fil+item[1]+'.jpeg', 'image/jpeg',
                               foto_copy_io.len, None)				
 
 		django_like_files.append(foto_copy_file)
-	
+	if new_path:
+		print 'new_path=',new_path
+		os.remove(new_path)
 	return django_like_files
-
-
-
-
 
 
 # Create your models here.

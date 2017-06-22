@@ -3,19 +3,30 @@
 {% block content %}
 
 <div class='form'>
-	<div class="enter-container">	
-		<h3>ДОБАВЬТЕ НОВЫЙ ОТЗЫВ</h3>
+	<div class="enter-container grey-form-block">
+		<a href="{% url 'company:otzivi' %}" type="button" class='close'><span >&times;</span></a>	
+		<h4 class="text-center">ДОБАВЬТЕ НОВЫЙ ОТЗЫВ</h4>		
+				
 	</div>
 	
-	<form enctype="{{enctype_atr}}" action="{{action_atr}}" method="post">
-{% csrf_token %}
-	<!-- <table class="form"> -->
-		{{ form.as_table }}
-	<!-- </table> -->
 	
-	<input type="submit" value="{{value}}">
-	<!-- <input type="hidden" name="next" value="{{ next }}"> -->
-</form>
+	<form enctype="{{enctype_atr}}" action="{{action_atr}}" method="post">
+		<div class="enter-container text-center">
+			{% csrf_token %}
+		
+
+		<div>	
+			{{ form.as_p}}
+
+		</div>
+	</div>
+		<div class="button-container text-center grey-form-block">
+			
+			<input class="btn btn-default" type="submit" value="ДОБАВИТЬ">
+			
+		<!-- <input type="hidden" name="next" value="{{ next }}"> -->
+		</div>
+	</form>
 </div>
 
 {% endblock %}
