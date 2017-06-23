@@ -2,7 +2,7 @@
 from django import forms
 
 from .widgets import MultiFileInput, PhoneField
-from .models import Callorderuser, Marka, Certificate
+from .models import Callorderuser, Marka, Certificate, Otziv
 # from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth.models import User
 
@@ -22,10 +22,20 @@ class CertificateForm(forms.Form):
 					# validators = [validate_images_format]
 					)
 
-class OtzivForm(forms.Form):
-	
-	otziv = forms.ImageField(label=u'PDF не поддерживается!',)
-	text = forms.CharField(label=u'НАБЕРИТЕ КРАТКО ТЕКСТ ОТЗЫВА',max_length = 1000,widget = forms.widgets.Textarea)
+class OtzivForm(forms.ModelForm):
+
+	class Meta:
+		model = Otziv
+		fields = ['otziv','text']
+		widgets = {
+			'text':forms.widgets.Textarea()	
+		}
+			
+		error_messages = {
+            'name': {
+                'max_length': "This writer's name is too long.",
+            },
+        }
 			
 class Callorder(forms.Form):
 

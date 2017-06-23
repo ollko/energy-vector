@@ -1,5 +1,5 @@
 # coding=utf-8
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 
 from django.contrib.auth.decorators import login_required, permission_required
@@ -40,7 +40,8 @@ def send_email(request):
 
 
 class CertificateList(ListView):
-    model = Certificate
+	model = Certificate
+
 
 
 def otzivList(request):
@@ -51,15 +52,20 @@ def otzivList(request):
 		for otziv in otzivs:
 			text= otziv.text
 			text_list = text.split('*|*')
-			print 'text_list=',text_list
 			otziv.text=text_list
 			
 
 	return 	render(request,'company/otziv_list.html',{'otzivs':otzivs,}, )
 
+@permission_required('company.add_otziv')
+@login_required	
+def otziv_corr(request):
+	pass
 
-
-
+@permission_required('company.add_otziv')
+@login_required	
+def otziv_del(request):
+	pass
 
 @permission_required('company.add_certificate')
 @login_required		
@@ -70,21 +76,7 @@ def certificates_new(request):
 		form = CertificateForm(request.POST, request.FILES)
 		
 		if form.is_valid():
-		# 	# process the data in form.cleaned_data as required
-		# 	marka_new = form.cleaned_data['marka_new']
-		# 	if marka_new:
-		# 		marka_new.lower()
-		# 		try:
-		# 			m=Marka.objects.get(marka=marka_new)
-		# 		except  DoesNotExist:
-		# 			choiced_marka = form.cleaned_data['choiced_marka'].lower()
-		# 			m=Marka(marka=choiced_marka)
-		# 			m.save()
-		# 		else:
-		# 			pass
-			
-			# if form.is_valid():
-				
+		
 			certificates = request.FILES
 			
 			i=len(certificates.getlist('certificate'))-1
@@ -113,6 +105,8 @@ def certificates_new(request):
 					    	'value':'добавить',
 					    	'enctype_atr':'multipart/form-data',
 					    	})
+
+
 
 
 @permission_required('company.add_otziv')
@@ -147,7 +141,31 @@ def otziv_new(request):
 
 
 	return render(request,  'company/otziv_new_form.html', {'form': form,
-					    	'title':'выберите файл с отзывами',
-					    	'value':'добавить',
-					    	'enctype_atr':'multipart/form-data',
+					    		'enctype_atr':'multipart/form-data',
 					    	})
+
+
+@permission_required('company.add_otziv')
+@login_required		
+def otziv_corr_detail(request,otziv_id):
+
+	otziv=get_object_or_404(Otziv,pk=otziv_id)
+	
+	if request.method =='POST':
+
+		form=OtzivForm(request.POST,request.FILES, instance=otziv)
+
+		if form.is_valid():
+			form.cleaned_data
+			form.save()
+			
+			o=get_object_or_404(Otziv,pk=otziv_id)
+			o.otziv_1x_2x()	
+			o.save()
+
+		return HttpResponseRedirect('/otzivi/')	
+
+	else:
+		form = OtzivForm(instance=otziv)
+
+	return render(request, 'company/otziv_corr_detail.html', {'form':form})	

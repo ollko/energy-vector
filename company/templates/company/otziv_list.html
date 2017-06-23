@@ -13,7 +13,9 @@
 	<div class="row">
 		{% if user.is_authenticated %}
 		  {% if perms.company.add_otziv %}
-		<div class="col-sm-3"><a  href="{% url 'company:otziv_new' %}" title="добавить сертификаты"><span class="glyphicon glyphicon-plus">добавить новый отзыв</span></a></div>
+		<div class="col-sm-4 col-sm-12"><a  href="{% url 'company:otziv_new' %}" title="добавить сертификаты"><span class="glyphicon glyphicon-plus">добавить новый отзыв</span></a></div>
+		<div class="col-sm-4 col-sm-12"><a  href="{% url 'company:otziv_corr' %}" title="добавить сертификаты"><span class="glyphicon glyphicon-plus">корректировать отзыв</span></a></div>
+		<div class="col-sm-4 col-sm-12"><a  href="{% url 'company:otziv_del' %}" title="добавить сертификаты"><span class="glyphicon glyphicon-plus">удалить отзывы</span></a></div>
 			{% endif %}
 		{% endif %}	
 	</div>
@@ -21,15 +23,17 @@
 	<br>
 	{% for otziv in otzivs %}
 	<div class="row">	
-		<div class="col-md-3 col-sm-12">
+		<div class="col-md-2 col-sm-12">
 			<a class="fancyimage" data-fancybox-group="group" title="{{otziv.otziv}}" href="{{otziv.otziv_2x.url}}">
-				<img class = 'otziv' src="{{otziv.otziv_1x.url}}" alt="{{otziv.otziv}}" alt="{{otziv.text}}" />
+				<img class = 'otziv img-responsive' src="{{otziv.otziv_1x.url}}" alt="{{otziv.otziv}}" alt="{{otziv.text}}" />
 			</a>
 		</div>
-		<div class="col-md-9 col-sm-12">
-		{% for paragraph in otziv.text %}
+		<div class="col-md-10 col-sm-12">
 		<br>
-			{{ paragraph }}
+		{% for paragraph in otziv.text %}
+			<p class="text-justify">
+				{{ paragraph }}
+			</p>
 		{% endfor %}
 		
 		</div>

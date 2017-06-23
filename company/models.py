@@ -124,13 +124,14 @@ class Certificate(models.Model):
 		
 class Otziv(models.Model):
 
-	otziv = models.ImageField(u'Выберите файл отзыва в формате .jpg или .jpeg',upload_to = 'otziv',)
+	otziv = models.ImageField(help_text='PDF не поддерживается!',upload_to = 'otziv',)
 	
 	otziv_1x = models.ImageField(null=True,default=None,upload_to = 'otziv',)
 	
 	otziv_2x = models.ImageField(null=True,default=None,upload_to = 'otziv',)
 
-	text = models.TextField(null=True,default=None,blank=True,max_length=1000,)
+	text = models.TextField(verbose_name=u'НАБЕРИТЕ КРАТКО ТЕКСТ ОТЗЫВА',
+		blank=True, null=True, default=None, max_length=1000,)
 	
 
 	def __unicode__(self):

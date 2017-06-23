@@ -1,0 +1,31 @@
+{% extends "common/__l_single_col.html" %}
+
+{% block content %}
+
+<div class='form'>
+	<div class="enter-container grey-form-block">
+		<a href="{% url 'company:otzivi' %}" type="button" class='close'><span >&times;</span></a>	
+		<h4 class="text-center">КОРРЕКТИРОВКА ОТЗЫВА</h4>		
+				
+	</div>
+	
+	
+	<form action="" method="post" enctype="multipart/form-data" >
+		<div class="enter-container text-center">
+			{% csrf_token %}
+		
+
+		<div>	
+			{{ form.as_p}}
+
+		</div>
+	</div>
+		<div class="button-container text-center grey-form-block">
+			
+			<input class="btn btn-default" type="submit" value="КОРРЕКТИРОВАТЬ">
+			
+		</div>
+	</form>
+</div>
+
+{% endblock %}

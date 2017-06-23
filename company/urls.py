@@ -16,13 +16,15 @@ urlpatterns = [
 
     url(r'^certificates/$', my_views.CertificateList.as_view(), name='certificates'),
 
-    url(r'^certificates/new$', my_views.certificates_new, name='certificates_new'),
+    url(r'^certificates_new/$', my_views.certificates_new, name='certificates_new'),
 
 
 
     url(r'^otzivi/$', my_views.otzivList, name='otzivi'),
-
-    url(r'^otzivi/new$', my_views.otziv_new, name='otziv_new'),
+    url(r'^otzivi_new/$', my_views.otziv_new, name='otziv_new'),
+    url(r'^otziv_corr/$', my_views.otziv_corr, name='otziv_corr'),
+    url(r'^otziv_corr/(?P<otziv_id>\d+)/$', my_views.otziv_corr_detail, name='otziv_corr_detail'),
+    url(r'^otziv_del/$', my_views.otziv_del, name='otziv_del'),
 
     url(r'^documents/$', TemplateView.as_view(template_name="end_templates/in_the_development.html",),),
 

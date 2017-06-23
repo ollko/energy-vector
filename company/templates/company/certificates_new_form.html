@@ -8,7 +8,7 @@
 		<a href="{% url 'company:certificates' %}" type="button" class='close'><span >&times;</span></a>		
 	</div>
 	
-	<form enctype="{{enctype_atr}}" action="{% url 'company:certificates_new' %}" method="post">
+	<form enctype="multipart/form-data" action="{% url 'company:certificates_new' %}" method="post">
 		{% csrf_token %}
 			<p class="text-center">Можно загрузить: JPEG,PNG,GIF,TIF</p>
 			<p class="text-center"><b>PDF НЕ ПОДДЕРЖИВАЕТСЯ!</b></p>
