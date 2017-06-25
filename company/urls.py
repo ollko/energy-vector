@@ -20,13 +20,13 @@ urlpatterns = [
 
 
 
-    url(r'^otzivi/$', my_views.otzivList, name='otzivi'),
+    url(r'^otzivi/$', my_views.OtzivList.as_view(), name='otzivi'),
     url(r'^otzivi_new/$', my_views.otziv_new, name='otziv_new'),
-    url(r'^otziv_corr/$', my_views.otziv_corr, name='otziv_corr'),
+    url(r'^otziv_corr/$', my_views.OtzivCorr.as_view(), name='otziv_corr'),
     url(r'^otziv_corr/(?P<otziv_id>\d+)/$', my_views.otziv_corr_detail, name='otziv_corr_detail'),
-    url(r'^otziv_del/$', my_views.otziv_del, name='otziv_del'),
+    url(r'^otziv_del/$', my_views.otziv_list_del, name='otziv_del'),
 
-    url(r'^documents/$', TemplateView.as_view(template_name="end_templates/in_the_development.html",),),
+    url(r'^documents/$', TemplateView.as_view(template_name="end_templates/in_the_development.html"),),
 
     url(r'^contacts/$', views.flatpage, {'url':'/contacts/'}, name='contacts'),
 

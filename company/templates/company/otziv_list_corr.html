@@ -1,0 +1,43 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+{% load bbcode_tags %}
+
+{% block stylesheet %}
+	{{ block.super }}
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'fancybox/jquery.fancybox.css' %}">
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+	<br>
+	<div class="row">
+		<div class="col-sm-4 col-sm-12"><a  href="{% url 'company:otziv_new' %}" title="добавить сертификаты"><span class="glyphicon glyphicon-chevron-left">вернуться</span></a></div>
+		<div class="col-md-12 col-sm-12">
+			<p class="text-center"><strong>Кликните на отзыв для корректировки</strong></p>
+		</div>
+	</div>
+	<br>
+	{% for otziv in otzivs %}
+	<div class="row">	
+		<div class="col-md-2 col-sm-12">
+			<a title="{{otziv.otziv}}" href="{% url 'company:otziv_corr_detail' otziv.id %}">
+				<img class = 'otziv img-responsive' src="{{otziv.otziv_1x.url}}" alt="{{otziv.otziv}}" alt="{{otziv.text}}" />
+			</a>
+		</div>
+		<div class="col-md-10 col-sm-12">
+			<br>
+			{% bbcode otziv.text %}		
+		</div>
+	</div>
+	<br>
+	{% endfor %}
+</div>
+{% endblock %}
+
+{% block javascript %}
+	{{ block.super }}
+	<script type="text/javascript" src = "{% static 'fancybox/jquery.fancybox.pack.js' %}"></script>
+	<script type="text/javascript" src = "{% static 'js/certificate.js' %}"></script>
+{% endblock %}

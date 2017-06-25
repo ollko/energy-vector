@@ -1,5 +1,6 @@
 {% extends "common/__l_single_col.html" %}
 {% load staticfiles %}
+{% load bbcode_tags %}
 
 {% block stylesheet %}
 	{{ block.super }}
@@ -11,13 +12,17 @@
 <br>
 <div class="container">
 	<div class="row">
-		{% if user.is_authenticated %}
-		  {% if perms.company.add_otziv %}
+{% if user.is_authenticated %}
+  {% if perms.company.add_otziv %}
 		<div class="col-sm-4 col-sm-12"><a  href="{% url 'company:otziv_new' %}" title="добавить сертификаты"><span class="glyphicon glyphicon-plus">добавить новый отзыв</span></a></div>
+		{% if otzivs and otzivs|length_is:"1" %}
+		<div class="col-sm-4 col-sm-12"><a  href="{% url 'company:otziv_corr_detail' otzivs.0.id %}" title="добавить сертификаты"><span class="glyphicon glyphicon-plus">корректировать отзыв</span></a></div>		
+		{% elif otzivs %}	
 		<div class="col-sm-4 col-sm-12"><a  href="{% url 'company:otziv_corr' %}" title="добавить сертификаты"><span class="glyphicon glyphicon-plus">корректировать отзыв</span></a></div>
+		{% endif %}
 		<div class="col-sm-4 col-sm-12"><a  href="{% url 'company:otziv_del' %}" title="добавить сертификаты"><span class="glyphicon glyphicon-plus">удалить отзывы</span></a></div>
-			{% endif %}
-		{% endif %}	
+	{% endif %}
+{% endif %}	
 	</div>
 
 	<br>
@@ -29,13 +34,8 @@
 			</a>
 		</div>
 		<div class="col-md-10 col-sm-12">
-		<br>
-		{% for paragraph in otziv.text %}
-			<p class="text-justify">
-				{{ paragraph }}
-			</p>
-		{% endfor %}
-		
+			<br>
+			{% bbcode otziv.text %}		
 		</div>
 	</div>
 	<br>

@@ -1,0 +1,52 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+{% load bbcode_tags %}
+
+{% block stylesheet %}
+	{{ block.super }}
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'fancybox/jquery.fancybox.css' %}">
+{% endblock %}
+
+{% block content %}
+<br>
+<form action="{% url 'company:otziv_del'%}" method="POST">
+	{% csrf_token %}
+	<div class="container">
+		<div class="row">			
+			<div class="col-sm-4 col-sm-12">
+				<input type='submit' value="удалить выбранное">
+			</div>	
+		</div>
+		<div class="row">
+			<div class="col-sm-4 col-sm-12">
+				<p ><strong>{{error}}</strong></p>
+			</div>
+		</div>
+
+		<br>
+		{% for otziv in otzivs %}
+		<div class="row">	
+			<div class="col-md-2 col-sm-12">
+				<input type="checkbox" name='{{otziv.id}}'>
+				<img class = 'otziv img-responsive' src="{{otziv.otziv_1x.url}}" alt="{{otziv.otziv}}" alt="{{otziv.text}}" />
+				
+			</div>
+			<div class="col-md-10 col-sm-12">
+				<br>
+				{% bbcode otziv.text %}		
+			</div>
+		</div>
+		<br>
+		{% endfor %}
+	</div>
+</form>
+
+
+{% endblock %}
+
+{% block javascript %}
+	{{ block.super }}
+	<script type="text/javascript" src = "{% static 'fancybox/jquery.fancybox.pack.js' %}"></script>
+	<script type="text/javascript" src = "{% static 'js/certificate.js' %}"></script>
+{% endblock %}

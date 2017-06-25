@@ -2,7 +2,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required,permission_required
+from django.utils.decorators import method_decorator
 
 from .models import Marka, Certificate, Otziv, Callorderuser
 from .forms import CertificateForm, OtzivForm, Callorder
@@ -43,29 +44,49 @@ class CertificateList(ListView):
 	model = Certificate
 
 
+class OtzivList(ListView):
+	'''Выводится страница с отзывами о компании
+	'''
+	model = Otziv
+	template_name = 'company/otziv_list.html'
+	context_object_name = 'otzivs'
+	# paginate_by = 2
+	# allow_ampty = True
 
-def otzivList(request):
-	'''выводит страницу с отзывами о работе компании'''
-	otzivs=Otziv.objects.all()
+
+
+
+class OtzivCorr(ListView):
+	'''
+	выводится страница, где можно выбрать отзыв для корректировки
+	'''
+	model = Otziv
+	template_name = 'company/otziv_list_corr.html'
+	context_object_name = 'otzivs'
+
+
+@permission_required('main.delete_foto')
+@login_required
+def otziv_list_del(request):
+
+	otzivs = Otziv.objects.all()
+	do_choice=0
 	
-	if otzivs:
+	if request.method =='POST':
+		error=None
 		for otziv in otzivs:
-			text= otziv.text
-			text_list = text.split('*|*')
-			otziv.text=text_list
-			
+			if unicode(otziv.id) in request.POST:
+				otziv.delete()
+				do_choice=1
+			if do_choice==1:
+				return HttpResponseRedirect('/otzivi/')
+			else:
+				error=u'**Вы не выбрали не одного отзыва для удаления!'				
+		return render(request, 'company/otziv_list_del.html',
+			{'otzivs':otzivs, 'error':error})
+	else:
+		return render(request, 'company/otziv_list_del.html',{'otzivs':otzivs,})
 
-	return 	render(request,'company/otziv_list.html',{'otzivs':otzivs,}, )
-
-@permission_required('company.add_otziv')
-@login_required	
-def otziv_corr(request):
-	pass
-
-@permission_required('company.add_otziv')
-@login_required	
-def otziv_del(request):
-	pass
 
 @permission_required('company.add_certificate')
 @login_required		
@@ -121,12 +142,12 @@ def otziv_new(request):
 			# process the data in form.cleaned_data as required
 			
 			t = form.cleaned_data['text']
-			t_list=re.split(r'\n+',t)
-			text='*|*'.join(t_list)
+			# t_list=re.split(r'\n+',t)
+			# text='*|*'.join(t_list)
 
 			otziv = request.FILES['otziv']
 			print 'otziv=',otziv	
-			o = Otziv(text = text, otziv = otziv)
+			o = Otziv(text = t, otziv = otziv)
 
 			o.save()
 
@@ -148,6 +169,9 @@ def otziv_new(request):
 @permission_required('company.add_otziv')
 @login_required		
 def otziv_corr_detail(request,otziv_id):
+	'''
+	корректировка одного отзыва
+	'''
 
 	otziv=get_object_or_404(Otziv,pk=otziv_id)
 	
