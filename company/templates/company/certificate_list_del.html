@@ -1,0 +1,47 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+
+{% block stylesheet %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'mosaicflow/mosaicflow.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fancybox/jquery.fancybox.css' %}">
+{% endblock %}
+
+{% block content %}
+<br>
+<form action="{% url 'company:certificate_list_del'%}" method="POST">
+	{% csrf_token %}
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-sm-12">
+				<input type='submit' value="удалить выбранное">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 col-sm-12">
+				<p ><strong>{{error}}</strong></p>
+			</div>
+		</div>
+
+		<br>
+		<div class="clearfix mosaicflow">
+			{% for certificate in certificates %}
+			
+			<div class="mosaicflow__item">
+				<input type="checkbox" name='{{certificate.id}}'>
+				<a class="fancyimage" data-fancybox-group="group" title="{{certificate.certificate}}" href="{{item.certificate_2x.url}}">
+					<img src="{{certificate.certificate_1x.url}}" alt="">
+				</a>
+			</div>
+			{% endfor %}
+
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascript %}
+	{{ block.super }}
+	<script type="text/javascript" src = "{% static 'fancybox/jquery.fancybox.pack.js' %}"></script>
+	<script src="{% static 'mosaicflow/jquery.mosaicflow.min.js' %}"></script>	
+	<script type="text/javascript" src = "{% static 'js/certificate.js' %}"></script>
+{% endblock %}

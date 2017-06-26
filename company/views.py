@@ -65,7 +65,7 @@ class OtzivCorr(ListView):
 	context_object_name = 'otzivs'
 
 
-@permission_required('main.delete_foto')
+@permission_required('company.delete_otziv')
 @login_required
 def otziv_list_del(request):
 
@@ -78,14 +78,40 @@ def otziv_list_del(request):
 			if unicode(otziv.id) in request.POST:
 				otziv.delete()
 				do_choice=1
-			if do_choice==1:
-				return HttpResponseRedirect('/otzivi/')
-			else:
-				error=u'**Вы не выбрали не одного отзыва для удаления!'				
-		return render(request, 'company/otziv_list_del.html',
-			{'otzivs':otzivs, 'error':error})
+		if do_choice==1:
+			return HttpResponseRedirect('/otzivi/')
+		else:
+			error=u'**Вы не выбрали не одного отзыва для удаления!'				
+			return render(request, 'company/otziv_list_del.html',
+					{'otzivs':otzivs, 'error':error})
 	else:
 		return render(request, 'company/otziv_list_del.html',{'otzivs':otzivs,})
+
+
+@permission_required('company.delete_certificate')
+@login_required
+def certificate_list_del(request):
+	certificates = Certificate.objects.all()
+	do_choice = 0
+
+	if request.method =='POST':
+		error=None
+		for certificate in certificates:
+			if unicode(certificate.id) in request.POST:				
+				certificate.delete()
+				do_choice=1
+		if do_choice==1:
+			return HttpResponseRedirect('/certificates/')
+		else:
+			error=u'**Вы не выбрали не одного сертификата для удаления!'				
+			return render(request, 'company/certificate_list_del.html',
+							{'certificates':certificates, 'error':error})
+	else:
+		return render(request, 'company/certificate_list_del.html',{'certificates':certificates,})
+
+
+
+
 
 
 @permission_required('company.add_certificate')

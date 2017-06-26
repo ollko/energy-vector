@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^certificates/$', my_views.CertificateList.as_view(), name='certificates'),
 
     url(r'^certificates_new/$', my_views.certificates_new, name='certificates_new'),
-
+    url(r'^certificate_list_del/$', my_views.certificate_list_del, name='certificate_list_del'),
 
 
     url(r'^otzivi/$', my_views.OtzivList.as_view(), name='otzivi'),
