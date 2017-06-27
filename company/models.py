@@ -31,7 +31,7 @@ def img_convert(img_file_path, size):
 	new_path=None
 	# Если для загрузки выбран файл не в JPG формате, преобразуем его в JPG:	
 	if not ext in right_ext:		
-		new_path=BASE_DIR+'/tmp/'+fil+'.jpeg'
+		new_path=BASE_DIR+'/tmp/'+unicode(fil)+'.jpeg'
 		
 		# конвертируем в JPEG:
 		img.save(new_path)
@@ -65,7 +65,7 @@ def img_convert(img_file_path, size):
 
 		django_like_files.append(foto_copy_file)
 	if new_path:
-		print 'new_path=',new_path
+		
 		os.remove(new_path)
 	return django_like_files
 
