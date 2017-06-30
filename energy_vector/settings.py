@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'precise_bbcode',
     'company.apps.CompanyConfig',
+   
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
