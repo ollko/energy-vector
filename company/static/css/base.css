@@ -126,3 +126,40 @@ h3.sro-title{
 .wrapper{
 	text-align: right;
 }
+
+/*страница Каталог (таблица)*/
+table.catalog{
+	table-layout: auto;
+	text-align:center;
+}
+table.catalog th{
+	background-color:#333333;
+	color:white;
+	text-align:center;
+
+}
+#content tr th{
+     vertical-align: middle; 
+     text-align: center; 
+     border: .2em solid #FFFFFF;
+     padding: 9px 10px;
+}
+#content tr td{
+     vertical-align: middle; 
+     text-align: center; 
+     padding: 0 10px;
+}
+#content tr.d2{
+     background-color: #CCCCCC;
+
+}
+
+p.text-justify{    
+	text-align: justify;
+}
+
+table.catalog th.invert{
+	background-color: white;
+	color: #333333
+}
+/*страница Каталог (таблица)*/

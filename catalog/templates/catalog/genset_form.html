@@ -1,0 +1,44 @@
+{% extends "common/__l_single_col.html" %}
+
+{% block content %}
+<form  action="" method="post" >
+	<div class = 'container'>
+	<br>
+		<p class="lead">
+			{{form.gensetengine.label}}
+			{{form.gensetengine}}
+			<a href=""><small><span class="glyphicon glyphicon-plus"></span></small></a>
+			<a href=""><small><span class="glyphicon glyphicon-pencil"></small></a>
+		</p>	
+
+		<table class='table catalog table-bordered '>
+			<tbody>
+				<tr>
+					<th rowspan="2">МОДЕЛЬ<br>ДГУ</th>
+					<th colspan="2">ESP(Stand-by)</th>
+					<th colspan="2">PRP(Prime)</th>
+					<th rowspan="2">GOV</th>
+					<th rowspan="2 specification">СПЕЦИФИКАЦИЯ</th>
+				</tr>
+				<tr>
+					<th>кВА</th>
+					<th>кВ</th>
+					<th>кВА</th>
+					<th>кВ</th>
+				</tr>
+				<tr>{% csrf_token %}
+					<td>{{form.model}}</td>
+					<td>{{form.stand_by_kva}}</td>
+					<td>{{form.stand_by_kw}}</td>
+					<td>{{form.prime_kva}}</td>
+					<td>{{form.prime_kw}}</td>
+					<td>{{form.engine_model}}</td>
+					<td>{{form.spec}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<input class="btn btn-default" type="submit" value="Добавить">
+	</div>
+</form>
+
+{% endblock %}

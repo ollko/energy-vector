@@ -1,0 +1,49 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div class = 'container'>
+<br>
+	<div class="row">
+	<h1>Вы действительно хотите удалить эту строку?</h1>
+		<br>
+		<table class='table catalog table-bordered '>
+			<tbody>
+				<tr>
+					<th rowspan="2">МОДЕЛЬ<br>ДГУ</th>
+					<th colspan="2">ESP(Stand-by)</th>
+					<th colspan="2">PRP(Prime)</th>
+					<th rowspan="2">GOV</th>
+					<th rowspan="2 specification">СПЕЦИФИКАЦИЯ</th>
+				</tr>
+				<tr>
+					<th>кВА</th>
+					<th>кВ</th>
+					<th>кВА</th>
+					<th>кВ</th>
+				</tr>
+				<tr>
+					<td>{{genset.model}}</td>
+					<td>{{genset.stand_by_kva}}</td>
+					<td>{{genset.stand_by_kw}}</td>
+					<td>{{genset.prime_kva}}</td>
+					<td>{{genset.prime_kw}}</td>
+					<td>{{genset.engine_model}}</td>
+					<td><a href="#"><img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<div class="col-sm-2">
+			<form action="" method="POST">
+				{% csrf_token %}
+				<input class="btn btn-warning" type="submit" action="" value="Да, удалить." />
+			</form>
+		</div>
+		<div class="col-sm-2">
+			<a class="btn btn-default" href="{% url 'catalog:genset_list' %}" role="button">Нет, оставить.</a>
+		</div>
+	</div>	
+</div>
+{% endblock %}

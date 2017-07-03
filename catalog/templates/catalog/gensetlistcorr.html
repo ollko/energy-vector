@@ -1,0 +1,52 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div class = 'container'>
+<br>
+	<div class="row">
+		{% if user.is_authenticated %}
+			{% if perms.company.add_genset %}
+		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'catalog:genset_list' %}" title="вернуться"><span class="glyphicon glyphicon-menu-left">вернуться</span></a>
+		</div>
+			{% endif %}
+		{% endif %}
+	</div>
+<br>	
+	<table class='table catalog table-bordered '>
+  <tbody>
+   <tr>
+	<th class="invert" rowspan="2">Удалить</th>
+	<th class="invert" rowspan="2">Править</th>
+    <th rowspan="2">МОДЕЛЬ<br>ДГУ</th>
+    <th colspan="2">ESP(Stand-by)</th>
+    <th colspan="2">PRP(Prime)</th>
+    <th rowspan="2">GOV</th>
+    <th rowspan="2 specification">СПЕЦИФИКАЦИЯ</th>
+   </tr>
+   <tr>
+		<th>кВА</th>
+		<th>кВ</th>
+		<th>кВА</th>
+		<th>кВ</th>
+   </tr>
+   {% if gensets %}
+	   {% for genset in gensets %}
+		<tr>
+		<td><a href="{% url 'catalog:genset_delete' genset.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+		<td><a href="{% url 'catalog:genset_update' genset.pk %}"><span class="glyphicon glyphicon-pencil"></a></td>
+		<td>{{genset.model}}</td>
+		<td>{{genset.stand_by_kva}}</td>
+		<td>{{genset.stand_by_kw}}</td>
+		<td>{{genset.prime_kva}}</td>
+		<td>{{genset.prime_kw}}</td>
+		<td>{{genset.engine_model}}</td>
+		<td><a href="#"><img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'></a></td>
+		</tr>
+	   {% endfor %}
+   {% endif %}
+   </tbody>
+   </table>
+
+</div>
+{% endblock %}
