@@ -1,0 +1,39 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div class = 'container'>
+	<br>
+	<div class="row">
+		
+		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'catalog:genset_list' %}" title="вернуться"><span class="glyphicon glyphicon-menu-left">вернуться</span></a>
+		</div>
+
+	</div>
+	<br>	
+	<table class='table catalog table-bordered '>
+  <tbody>
+   <tr>
+	<th class="invert">Удалить</th>
+	<th class="invert">Править</th>
+    <th>Марка</th>
+    <th>Лого</th>
+    <th>Текст на страницу ...</th>
+   </tr>
+   
+   {% if gensetengines %}
+	   {% for gensetengine in gensetengines %}
+		<tr>
+		<td><a href="{% url 'catalog:gensetengine_delete' gensetengine.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+		<td><a href="{% url 'catalog:gensetengine_update' gensetengine.pk %}"><span class="glyphicon glyphicon-pencil"></a></td>
+		<td>{{gensetengine.engine}}</td>
+		<td>{{gensetengine.logo}}</td>
+		<td>{{gensetengine.text}}</td>
+		</tr>
+	   {% endfor %}
+   {% endif %}
+   </tbody>
+   </table>
+
+</div>
+{% endblock %}

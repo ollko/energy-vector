@@ -41,7 +41,7 @@
 		<td>{{genset.prime_kva}}</td>
 		<td>{{genset.prime_kw}}</td>
 		<td>{{genset.engine_model}}</td>
-		<td><a href="#"><img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'></a></td>
+		<td><a href="{{genset.spec.url}}"><img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'></a></td>
 		</tr>
 	   {% endfor %}
    {% endif %}

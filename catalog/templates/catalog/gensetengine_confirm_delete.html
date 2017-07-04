@@ -1,0 +1,42 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div class = 'container'>
+<br>
+	<div class="row">
+	<h2>Вы действительно хотите удалить эту марку?</h2>
+		<br>
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Производитель двигателя ДГУ</th>
+					<td>{{gensetengine.engine}}</td>
+					
+				</tr>
+				<tr>
+					<th>Логотип</th>
+					<td>{{gensetengine.logo}}</td>
+					
+				</tr>
+				<tr>
+					<th>Текст ...</th>
+					<td>{{gensetengine.text}}</td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<div class="col-sm-2">
+			<form action="" method="POST">
+				{% csrf_token %}
+				<input class="btn btn-warning" type="submit" action="" value="Да, удалить." />
+			</form>
+		</div>
+		<div class="col-sm-2">
+			<a class="btn btn-default" href="{% url 'catalog:genset_list_corr' %}" role="button">Нет, оставить.</a>
+		</div>
+	</div>	
+</div>
+{% endblock %}

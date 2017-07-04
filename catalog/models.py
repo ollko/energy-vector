@@ -7,11 +7,11 @@ from django.db import models
 
 class Gensetengine(models.Model):
 	engine = models.CharField(max_length = 20, unique = True,
-			verbose_name = "производитель двигателя ДГУ")
-	logo = models.ImageField(verbose_name = "Логотип марки двигателя ДГУ", 
+			verbose_name = "Производитель двигателя ДГУ")
+	logo = models.ImageField(verbose_name = "Логотип", 
 			upload_to = 'catalog/dgu/logo', blank=True, null=True, default=None,)
 
-	text = models.TextField(verbose_name = 'Текст, кот. будет выводиться перед таблицей с моделями дизельгенераторов',
+	text = models.TextField(verbose_name = 'Текст, кот. будет выводиться перед ...',
 			blank=True, null=True, default=None,)
 
 	def __unicode__(self):
@@ -41,7 +41,8 @@ class Genset(models.Model):
 	
 	engine_model = models.SlugField(verbose_name = "Модель двигателя", max_length = 10)
 
-	spec = models.FileField(verbose_name = "pdf файл спецификации",blank=True, null=True, default=None,)
+	spec = models.FileField(verbose_name = "pdf файл спецификации",
+		upload_to = 'catalog/dgu/spec_pdf', blank=True, null=True, default=None,)
 
 	def __unicode__(self):
 		return self.model

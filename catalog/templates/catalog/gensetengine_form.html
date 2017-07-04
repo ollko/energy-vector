@@ -1,0 +1,32 @@
+{% extends "common/__l_single_col.html" %}
+
+{% block content %}
+<form  action="" method="post" enctype="multipart/form-data">
+	<div class = 'container'>
+		<h3>Данные о марке двигателя:</h3>
+
+		<table class="table">
+			<tbody>
+			{% csrf_token %}
+				<tr>
+					<th>{{form.engine.label}}</th>
+					<td>{{form.engine}}</td>
+					{{form.engine.errors}}
+				</tr>
+				<tr>
+					<th>{{form.logo.label}}</th>
+					<td>{{form.logo}}</td>
+					{{form.logo.errors}}
+				</tr>
+				<tr>
+					<th>{{form.text.label}}</th>
+					<td>{{form.text}}</td>
+					{{form.text.errors}}
+				</tr>
+			</tbody>
+		</table>
+		<input class="btn btn-default" type="submit" value="СОХРАНИТЬ">
+	</div>
+</form>
+
+{% endblock %}

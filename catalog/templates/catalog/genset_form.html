@@ -1,15 +1,26 @@
 {% extends "common/__l_single_col.html" %}
 
 {% block content %}
-<form  action="" method="post" >
+<form  action="" method="post" enctype="multipart/form-data">
 	<div class = 'container'>
 	<br>
-		<p class="lead">
-			{{form.gensetengine.label}}
-			{{form.gensetengine}}
-			<a href=""><small><span class="glyphicon glyphicon-plus"></span></small></a>
-			<a href=""><small><span class="glyphicon glyphicon-pencil"></small></a>
-		</p>	
+	<div class='row'>
+		<div class="col-sm-12"><a class='certificate-menu' href="{% url 'catalog:genset_list' %}" title="вернуться"><span class="glyphicon glyphicon-menu-left">вернуться</span></a>
+		</div>
+	</div>
+	<br>
+	<div class='row'>
+		<div class="col-sm-12">
+			<span class="lead">
+				{{form.gensetengine.label}}:
+			</span>
+			<span>
+				{{form.gensetengine}}
+				<a href="{% url 'catalog:gensetengine_create' %}" title="добавить марку, если нет в списке"><span class="glyphicon glyphicon-plus"></span></a>
+				<a href="{% url 'catalog:gensetengine_list_corr' %}" title="редактировать базу марок двигателей" ><span class="glyphicon glyphicon-pencil"></span></a>
+			</span>
+		</div>		
+	</div>
 
 		<table class='table catalog table-bordered '>
 			<tbody>
@@ -37,6 +48,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<p>{{form.model.errors}}</p>
 		<input class="btn btn-default" type="submit" value="Добавить">
 	</div>
 </form>
