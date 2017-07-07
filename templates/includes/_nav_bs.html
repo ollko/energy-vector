@@ -39,18 +39,18 @@
             <li class="dropdown-submenu">
               <a tabindex="-1" href="#">ДИЗЕЛЬГЕНЕРАТОРЫ</a>
               <ul class="dropdown-menu">
-                <li><a  href="/catalog/dgu/perkins">PERKINS</a></li>
+              {% if gensetengines %}
+                {% for gensetengine  in gensetengines %}
+                <li><a  href="{% url 'catalog:genset_list' gensetengine.pk %}">{{gensetengine.engine|upper}}</a></li>
                 <li class="divider"></li>
-                <li><a  href="#">CUMMINS</a></li>
-                <li class="divider"></li>
-                <li><a  href="#">SCANIA</a></li>
-                <li class="divider"></li>
-                <li><a  href="#">DOOSAN</a></li>
+                {% endfor %}
+              {% endif %}
               </ul>
             </li>
             <li class="divider"></li>
             <li class="dropdown-submenu">
               <a tabindex="-1" href="#">ИБП</a>
+              {% comment %}
               <ul class="dropdown-menu">
                 <li><a  href="#">марка1</a></li>
                 <li class="divider"></li>
@@ -60,6 +60,7 @@
                 <li class="divider"></li>
                 <li><a  href="#">марка4</a></li>
               </ul>
+              {% endcomment %}
             </li>
           </ul>
 

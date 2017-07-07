@@ -5,7 +5,7 @@
 	<div class = 'container'>
 	<br>
 	<div class='row'>
-		<div class="col-sm-12"><a class='certificate-menu' href="{% url 'catalog:genset_list' %}" title="вернуться"><span class="glyphicon glyphicon-menu-left">вернуться</span></a>
+		<div class="col-sm-12"><a class='certificate-menu' href="{% url 'catalog:genset_list' gensetengine_pk %}" title="вернуться"><span class="glyphicon glyphicon-menu-left">вернуться</span></a>
 		</div>
 	</div>
 	<br>
@@ -19,16 +19,19 @@
 				<a href="{% url 'catalog:gensetengine_create' %}" title="добавить марку, если нет в списке"><span class="glyphicon glyphicon-plus"></span></a>
 				<a href="{% url 'catalog:gensetengine_list_corr' %}" title="редактировать базу марок двигателей" ><span class="glyphicon glyphicon-pencil"></span></a>
 			</span>
+		<div class="col-sm-12 text-danger">
+			{{form.gensetengine.errors}}
+		</div>	
 		</div>		
 	</div>
 
 		<table class='table catalog table-bordered '>
 			<tbody>
 				<tr>
-					<th rowspan="2">МОДЕЛЬ<br>ДГУ</th>
+					<th rowspan="2">МОДЕЛЬ<br>ДГУ<br></th>
 					<th colspan="2">ESP(Stand-by)</th>
 					<th colspan="2">PRP(Prime)</th>
-					<th rowspan="2">GOV</th>
+					<th rowspan="2">МОДЕЛЬ<br>ДВИГАТЕЛЯ<br></th>
 					<th rowspan="2 specification">СПЕЦИФИКАЦИЯ</th>
 				</tr>
 				<tr>
@@ -46,9 +49,20 @@
 					<td>{{form.engine_model}}</td>
 					<td>{{form.spec}}</td>
 				</tr>
+				{% if form.model.errors or form.stand_by_kva.errors or form.stand_by_kw.errors or form.prime_kva.errors or form.prime_kw.errors or form.engine_model.errors or form.spec.errors %}
+				<tr>
+					<td class="text-danger last">{{form.model.errors}}</td>
+					<td class="text-danger last">{{form.stand_by_kva.errors}}</td>
+					<td class="text-danger last">{{form.stand_by_kw.errors}}</td>
+					<td class="text-danger last">{{form.prime_kva.errors}}</td>
+					<td class="text-danger last">{{form.prime_kw.errors}}</td>
+					<td class="text-danger last">{{form.engine_model.errors}}</td>
+					<td class="text-danger last">{{form.spec.errors}}</td>
+				</tr>
+				{% endif %}
 			</tbody>
 		</table>
-		<p>{{form.model.errors}}</p>
+		
 		<input class="btn btn-default" type="submit" value="Добавить">
 	</div>
 </form>

@@ -6,19 +6,19 @@ from . import views
 app_name = 'catalog'
 urlpatterns = [
 
-    url(r'^dgu/perkins/$', views.GensetList.as_view(), 
+    url(r'^dgu/(?P<gensetengine_id>\d+)/$', views.GensetList.as_view(), 
 						    	name='genset_list',),
 
-    url(r'^dgu/perkins/corr/$', views.GensetListCorr.as_view(), 
+    url(r'^dgu/(?P<gensetengine_id>\d+)/corr/$', views.GensetListCorr.as_view(), 
 						    	name='genset_list_corr',),
 
-	url(r'^dgu/perkins/create/$', views.GensetCreate.as_view(), 
+	url(r'^dgu/(?P<gensetengine_id>\d+)/create/$', views.GensetCreate.as_view(), 
 						    	name='genset_create',),
 
-	url(r'^dgu/perkins/(?P<pk>\d+)/update/$', views.GensetUpdate.as_view(), 
+	url(r'^dgu/(?P<pk>\d+)/update/$', views.GensetUpdate.as_view(), 
 						    	name='genset_update',),
 
-	url(r'^dgu/perkins/(?P<pk>\d+)/delete/$', views.GensetDelete.as_view(), 
+	url(r'^dgu/(?P<pk>\d+)/delete/$', views.GensetDelete.as_view(), 
 								name='genset_delete',),
 
 	url(r'^dgu/gensetengine/corr/$', views.GensetengineListCorr.as_view(), 

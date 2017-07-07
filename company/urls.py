@@ -12,7 +12,7 @@ urlpatterns = [
 
     url(r'^send-email/$', my_views.send_email,   name='send_email',),
 
-    url(r'^sro/$', TemplateView.as_view(template_name="company/sro.html",),),
+    url(r'^sro/$', my_views.SroView.as_view(),),
 
     url(r'^certificates/$', my_views.CertificateList.as_view(), name='certificates'),
 

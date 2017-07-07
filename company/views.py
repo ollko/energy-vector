@@ -6,9 +6,13 @@ from django.contrib.auth.decorators import login_required,permission_required
 from django.utils.decorators import method_decorator
 
 from .models import Marka, Certificate, Otziv, Callorderuser
+from catalog.models import Gensetengine
 from .forms import CertificateForm, OtzivForm, Callorder
 from django.views.generic import ListView
 from django.core.mail import send_mail
+
+from django.views.generic import TemplateView
+from catalog.views import GensetengineListMixin
 
 import re
 
@@ -16,8 +20,9 @@ import re
 # Create your views here.
 def index(request):
 	form = Callorder()
-
-	return render(request, 'end_templates/index.html',{'form':form})
+	gensetengines = Gensetengine.objects.all()
+	return render(request, 'end_templates/index.html',
+				{'form':form, 'gensetengines':gensetengines})
 
 def send_email(request):
 
@@ -40,23 +45,21 @@ def send_email(request):
 				return HttpResponseRedirect('/')	
 
 
-class CertificateList(ListView):
+class CertificateList(ListView, GensetengineListMixin):
 	model = Certificate
+	
+class SroView(TemplateView, GensetengineListMixin):
+	template_name="company/sro.html"
 
-
-class OtzivList(ListView):
+class OtzivList(ListView, GensetengineListMixin):
 	'''Выводится страница с отзывами о компании
 	'''
 	model = Otziv
 	template_name = 'company/otziv_list.html'
 	context_object_name = 'otzivs'
-	# paginate_by = 2
-	# allow_ampty = True
 
 
-
-
-class OtzivCorr(ListView):
+class OtzivCorr(ListView, GensetengineListMixin):
 	'''
 	выводится страница, где можно выбрать отзыв для корректировки
 	'''
@@ -68,6 +71,7 @@ class OtzivCorr(ListView):
 @permission_required('company.delete_otziv')
 @login_required
 def otziv_list_del(request):
+	gensetengines = Gensetengine.objects.all()
 
 	otzivs = Otziv.objects.all()
 	do_choice=0
@@ -83,14 +87,17 @@ def otziv_list_del(request):
 		else:
 			error=u'**Вы не выбрали не одного отзыва для удаления!'				
 			return render(request, 'company/otziv_list_del.html',
-					{'otzivs':otzivs, 'error':error})
+					{'otzivs':otzivs, 'error':error, 'gensetengines':gensetengines})
 	else:
-		return render(request, 'company/otziv_list_del.html',{'otzivs':otzivs,})
+		return render(request, 'company/otziv_list_del.html',
+			{'otzivs':otzivs, 'gensetengines':gensetengines})
 
 
 @permission_required('company.delete_certificate')
 @login_required
 def certificate_list_del(request):
+	gensetengines = Gensetengine.objects.all()
+
 	certificates = Certificate.objects.all()
 	do_choice = 0
 
@@ -107,7 +114,8 @@ def certificate_list_del(request):
 			return render(request, 'company/certificate_list_del.html',
 							{'certificates':certificates, 'error':error})
 	else:
-		return render(request, 'company/certificate_list_del.html',{'certificates':certificates,})
+		return render(request, 'company/certificate_list_del.html',
+			{'certificates':certificates, 'gensetengines':gensetengines})
 
 
 
@@ -117,6 +125,8 @@ def certificate_list_del(request):
 @permission_required('company.add_certificate')
 @login_required		
 def certificates_new(request):
+	gensetengines = Gensetengine.objects.all()
+
 	# if this is a POST request we need to process the form data
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
@@ -151,6 +161,7 @@ def certificates_new(request):
 					    	'title':'выберите файлы с сертификатами',
 					    	'value':'добавить',
 					    	'enctype_atr':'multipart/form-data',
+					    	'gensetengines':gensetengines
 					    	})
 
 
@@ -159,6 +170,8 @@ def certificates_new(request):
 @permission_required('company.add_otziv')
 @login_required		
 def otziv_new(request):
+	gensetengines = Gensetengine.objects.all()
+
 	# if this is a POST request we need to process the form data
 	if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -189,6 +202,7 @@ def otziv_new(request):
 
 	return render(request,  'company/otziv_new_form.html', {'form': form,
 					    		'enctype_atr':'multipart/form-data',
+					    		'gensetengines':gensetengines
 					    	})
 
 
@@ -198,6 +212,7 @@ def otziv_corr_detail(request,otziv_id):
 	'''
 	корректировка одного отзыва
 	'''
+	gensetengines = Gensetengine.objects.all()
 
 	otziv=get_object_or_404(Otziv,pk=otziv_id)
 	
@@ -218,4 +233,5 @@ def otziv_corr_detail(request,otziv_id):
 	else:
 		form = OtzivForm(instance=otziv)
 
-	return render(request, 'company/otziv_corr_detail.html', {'form':form})	
+	return render(request, 'company/otziv_corr_detail.html',
+						{'form':form,'gensetengines':gensetengines})	

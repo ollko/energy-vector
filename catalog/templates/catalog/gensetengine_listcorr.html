@@ -6,28 +6,31 @@
 	<br>
 	<div class="row">
 		
-		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'catalog:genset_list' %}" title="вернуться"><span class="glyphicon glyphicon-menu-left">вернуться</span></a>
+		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'catalog:genset_list' gensetengine_id %}" title="вернуться"><span class="glyphicon glyphicon-menu-left">вернуться</span></a>
 		</div>
 
 	</div>
 	<br>	
 	<table class='table catalog table-bordered '>
-  <tbody>
-   <tr>
-	<th class="invert">Удалить</th>
-	<th class="invert">Править</th>
-    <th>Марка</th>
-    <th>Лого</th>
-    <th>Текст на страницу ...</th>
-   </tr>
-   
+	<thead>
+		<tr>
+			<th class="invert">Удалить</th>
+			<th class="invert">Править</th>
+			<th>Марка</th>
+			<th>Лого</th>
+			<th>Текст на страницу ...</th>
+		</tr>
+	</thead>
+   <tbody>
    {% if gensetengines %}
 	   {% for gensetengine in gensetengines %}
 		<tr>
 		<td><a href="{% url 'catalog:gensetengine_delete' gensetengine.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
 		<td><a href="{% url 'catalog:gensetengine_update' gensetengine.pk %}"><span class="glyphicon glyphicon-pencil"></a></td>
 		<td>{{gensetengine.engine}}</td>
-		<td>{{gensetengine.logo}}</td>
+		<td>{% if gensetengine.logo %}
+		<img src="{{gensetengine.logo.url}}" class="img-thumbnail"alt='{{gensetengine.engine}} логотип'>
+			{% endif %}</td>
 		<td>{{gensetengine.text}}</td>
 		</tr>
 	   {% endfor %}

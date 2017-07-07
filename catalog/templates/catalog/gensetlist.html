@@ -1,47 +1,83 @@
 {% extends "common/__l_single_col.html" %}
 {% load staticfiles %}
+
+{% block stylesheet %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/responsive_catalog_table.css' %}">
+{% endblock %}
+
 {% block content %}
 
 <div class = 'container'>
-<br>
-	<div class="row">
+
+	<div class="row catalog-fill">
+	<br>
 		{% if user.is_authenticated %}
 			{% if perms.company.add_genset %}
-		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'catalog:genset_create' %}" title="добавить дизельгенератор"><span class="glyphicon glyphicon-plus">добавить дизельгенератор</span></a>
+		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'catalog:genset_create' gensetengine.pk %}" title="добавить дизельгенератор"><span class="glyphicon glyphicon-plus">добавить дизельгенератор</span></a>
 		</div>
 				{% if gensets|length %}
-		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'catalog:genset_list_corr' %}" title="редактировать таблицу"><span class="glyphicon glyphicon-remove"></span> <span class="glyphicon glyphicon-pencil">редактировать таблицу</span></a>
+		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'catalog:genset_list_corr' gensetengine.pk %}" title="редактировать таблицу"><span class="glyphicon glyphicon-remove"></span> <span class="glyphicon glyphicon-pencil">редактировать таблицу</span></a>
 		</div>
 				{% endif %}
 			{% endif %}
 		{% endif %}
 	</div>
-<br>	
-	<table class='table catalog table-bordered '>
-  <tbody>
-   <tr>
-    <th rowspan="2">МОДЕЛЬ<br>ДГУ</th>
-    <th colspan="2">ESP(Stand-by)</th>
-    <th colspan="2">PRP(Prime)</th>
-    <th rowspan="2">GOV</th>
-    <th rowspan="2 specification">СПЕЦИФИКАЦИЯ</th>
-   </tr>
-   <tr>
-		<th>кВА</th>
-		<th>кВ</th>
-		<th>кВА</th>
-		<th>кВ</th>
-   </tr>
+	<br>
+	<div class="row">
+		{% if gensetengine.logo %}
+		<div class="col-md-1 col-sm-12">
+			<img class="img-responsive" src="{{gensetengine.logo.url}}">
+		</div>
+		{% endif %}
+
+		<div class="col-md-11 col-sm-12">
+			<h1 >{{gensetengine.engine|upper}}</h1>
+		</div>
+		
+	</div>
+	
+<table class='table catalog table-bordered table-striped'>
+
+	<thead>
+		<tr>
+			<th rowspan="2">МОДЕЛЬ<br>ДГУ</th>
+			<th colspan="2">ESP(Stand-by)</th>
+			<th colspan="2">PRP(Prime)</th>
+			<th rowspan="2">МОДЕЛЬ<br>ДВИГАТЕЛЯ</th>
+			<th rowspan="2 specification">СПЕЦИФИКАЦИЯ</th>
+		</tr>
+		<tr>
+			<th>кВА</th>
+			<th>кВ</th>
+			<th>кВА</th>
+			<th>кВ</th>
+		</tr>
+	</thead>
+   
+
+   <tbody>
    {% if gensets %}
 	   {% for genset in gensets %}
 		<tr>
-		<td>{{genset.model}}</td>
-		<td>{{genset.stand_by_kva}}</td>
-		<td>{{genset.stand_by_kw}}</td>
-		<td>{{genset.prime_kva}}</td>
-		<td>{{genset.prime_kw}}</td>
-		<td>{{genset.engine_model}}</td>
-		<td><a href="{{genset.spec.url}}"><img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'></a></td>
+			<td>{{genset.model}}</td>
+			<td>{{genset.stand_by_kva}}</td>
+			<td>{{genset.stand_by_kw}}</td>
+			<td>{{genset.prime_kva}}</td>
+			<td>{{genset.prime_kw}}</td>
+			<td>{{genset.engine_model}}</td>
+
+			<td>
+			{% if genset.spec %}
+				<a href="{{genset.spec.url}}">
+					<img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'>
+				</a>
+			{% else %}
+				<a href="">
+					<img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'>
+				</a>
+				{% endif %}
+			</td>
 		</tr>
 	   {% endfor %}
    {% endif %}
