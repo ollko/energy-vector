@@ -1,13 +1,37 @@
+/*@media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  {
+Не отображать облако меток в заголовке сайта в телефоне
+div.tag-cloud{
+	display: none;
+}
+}*/
 .text-danger{
 	color: red;
 } 
 .grey-top{
 	margin-top: 50px;
 	padding: 30px 0 10px;
-	background-image: linear-gradient( #fff 0, #f8f8f8 100%);
+	background-color: #f4f4f4;
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 1px 5px rgba(0,0,0,0.075);
 	font-size: 1.1em;
 	text-align: left;
+
+/* IE10 Consumer Preview  
+background-image: -ms-radial-gradient(right top, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
+
+ Mozilla Firefox  
+background-image: -moz-radial-gradient(right top, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
+
+ Opera  
+background-image: -o-radial-gradient(right top, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
+
+ Webkit (Safari/Chrome 10)  
+background-image: -webkit-gradient(radial, right top, 0, right top, 1011, color-stop(0, #FFFFFF), color-stop(0.5, #DEF9FC), color-stop(1, #C7C4D1));
+
+ Webkit (Chrome 11+)  
+background-image: -webkit-radial-gradient(right top, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
+
+ W3C Markup, IE10 Release Preview  
+background-image*/: radial-gradient(ellipse farthest-corner at right top, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
 }
 img.grey-top-brand:hover{
 	opacity:0.75;
@@ -34,8 +58,25 @@ img.grey-top-brand:hover{
 	
 	width: 100%;
 	padding: 50px;
-	color: #999;
+	color: #727272;
 	background-color: #f4f4f4;
+	/* IE10 Consumer Preview  
+	background-image: -ms-radial-gradient(right bottom, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
+
+	 Mozilla Firefox  
+	background-image: -moz-radial-gradient(right bottom, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
+
+	 Opera  
+	background-image: -o-radial-gradient(right bottom, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
+
+	 Webkit (Safari/Chrome 10)  
+	background-image: -webkit-gradient(radial, right bottom, 0, right bottom, 1011, color-stop(0, #FFFFFF), color-stop(0.5, #DEF9FC), color-stop(1, #C7C4D1));
+
+	 Webkit (Chrome 11+)  
+	background-image: -webkit-radial-gradient(right bottom, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
+
+	 W3C Markup, IE10 Release Preview  
+	background-image: radial-gradient(ellipse farthest-corner at righ*/t bottom, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
 }
 
 /*кнопка ЗАКАЗАТЬ ЗВОНОК*/
