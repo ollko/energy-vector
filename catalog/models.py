@@ -34,10 +34,10 @@ class Genset(models.Model):
 	gensetengine = models.ForeignKey(Gensetengine,verbose_name = 'Марка двигателя')
 	model = models.CharField(verbose_name = "Марка  дизельгенератора",
 				max_length = 10, unique = True)
-	stand_by_kva = models.DecimalField(verbose_name = "ESP(Stand-by)/кВА", max_digits=4, decimal_places=1)
-	stand_by_kw = models.DecimalField(verbose_name = "ESP(Stand-by)/кВт", max_digits=4, decimal_places=1)
-	prime_kva = models.DecimalField(verbose_name = "PRP(Prime)/кВА", max_digits=4, decimal_places=1)
-	prime_kw = models.DecimalField(verbose_name = "PRP(Prime)/кВт", max_digits=4, decimal_places=1)
+	stand_by_kva = models.DecimalField(verbose_name = "ESP(Stand-by)/кВА", max_digits=8, decimal_places=1)
+	stand_by_kw = models.DecimalField(verbose_name = "ESP(Stand-by)/кВт", max_digits=8, decimal_places=1)
+	prime_kva = models.DecimalField(verbose_name = "PRP(Prime)/кВА", max_digits=8, decimal_places=1)
+	prime_kw = models.DecimalField(verbose_name = "PRP(Prime)/кВт", max_digits=8, decimal_places=1)
 	
 	engine_model = models.SlugField(verbose_name = "Модель двигателя", max_length = 20, unique = True)
 
