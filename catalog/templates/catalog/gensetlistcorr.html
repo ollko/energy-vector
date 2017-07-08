@@ -53,7 +53,10 @@
 		<td>{{genset.prime_kva}}</td>
 		<td>{{genset.prime_kw}}</td>
 		<td>{{genset.engine_model}}</td>
-		<td><a href="#"><img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'></a></td>
+		<td>
+		{% if genset.spec %}
+		<a href="#"><img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'></a></td>
+		{% endif %}
 		</tr>
 	   {% endfor %}
    {% endif %}
