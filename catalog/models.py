@@ -39,7 +39,7 @@ class Genset(models.Model):
 	prime_kva = models.DecimalField(verbose_name = "PRP(Prime)/кВА", max_digits=4, decimal_places=1)
 	prime_kw = models.DecimalField(verbose_name = "PRP(Prime)/кВт", max_digits=4, decimal_places=1)
 	
-	engine_model = models.SlugField(verbose_name = "Модель двигателя", max_length = 10)
+	engine_model = models.SlugField(verbose_name = "Модель двигателя", max_length = 20, unique = True)
 
 	spec = models.FileField(verbose_name = "pdf файл спецификации",
 		upload_to = 'catalog/dgu/spec_pdf', blank=True, null=True, default=None,)
