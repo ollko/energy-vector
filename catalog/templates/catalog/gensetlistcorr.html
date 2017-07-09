@@ -20,8 +20,8 @@
 		</div>
 		{% endif %}
 
-		<div class="col-md-6 col-sm-12">
-			<p class='lead'>{{gensetengine.engine|upper}}</p>
+		<div class="col-md-11 col-sm-12">
+			<h1 >{{gensetengine.engine|upper}}</h1>
 		</div>
 		
 	</div>	
@@ -56,6 +56,8 @@
 		<td>
 		{% if genset.spec %}
 		<a href="#"><img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'></a></td>
+		{% else %}
+		-
 		{% endif %}
 		</tr>
 	   {% endfor %}

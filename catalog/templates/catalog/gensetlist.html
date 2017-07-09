@@ -26,12 +26,13 @@
 	<br>
 	<div class="row">
 		{% if gensetengine.logo %}
-		<div class="col-md-1 col-sm-12">
+		<div class="col-md-1 col-sm-12 catalog-marka">
 			<img class="img-responsive" src="{{gensetengine.logo.url}}">
 		</div>
+
 		{% endif %}
 
-		<div class="col-md-11 col-sm-12">
+		<div class="col-md-11 col-sm-12 ">
 			<h1 >{{gensetengine.engine|upper}}</h1>
 		</div>
 		
@@ -72,6 +73,8 @@
 				<a href="{{genset.spec.url}}">
 					<img src="{% static 'images/get_pdf.jpg' %} " alt='получить спецификацию'>
 				</a>
+			{% else %}
+			-
 			{% endif %}
 			</td>
 		</tr>
