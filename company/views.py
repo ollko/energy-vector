@@ -9,7 +9,7 @@ from .models import Marka, Certificate, Otziv, Callorderuser
 from catalog.models import Gensetengine
 from .forms import CertificateForm, OtzivForm, Callorder
 from django.views.generic import ListView
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 
 from django.views.generic import TemplateView
 from catalog.views import GensetengineListMixin
@@ -25,9 +25,10 @@ def index(request):
 				{'form':form, 'gensetengines':gensetengines})
 
 def send_email(request):
+	gensetengines = Gensetengine.objects.all()
 	# путь для перенаправления при успешной отправке письма, или при отказе от заказа звонка:
 	
-	next_path = request.META.get('HTTP_REFERER','/')
+	# next_path = request.META.get('HTTP_REFERER','/')
 	    # if this is a POST request we need to process the form data
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
@@ -40,23 +41,23 @@ def send_email(request):
 			phone_number = form.cleaned_data['phone_number']
 			question = form.cleaned_data['question']
 			if not question:
-				question = 'У матросов нет вопросов.'
+				question = u'У матросов нет вопросов.'
 			if name and phone_number and question:
-				content = '<h3>Кому позвонить: '+name+"</h3><p>телефон: "+phone_number+'</p><p>вопрос: '+question+"</p>"
+				text = u'Кому позвонить: '+unicode(name)+u"\nTелефон: "+phone_number+u'\nВопрос: '+question
 				try:
-					send_mail(u'Заявка на обратный звонок', question, 'korotkaya.olga@yandex.ru',
-						    ['korotkaya.olga@yandex.ru',], fail_silently=False)
-				except BadHeaderError:
+					send_mail(u'Заявка на обратный звонок', text, 'energy-vector@energy-vector.ru',
+						    ['korotkaya.olga@yandex.ru','lnv@energy-vector.ru'], fail_silently=False)
+				except  BadHeaderError:
 					return HttpResponse('Invalid header found.')
 				
 				# redirect to a new URL:
 
-				return HttpResponseRedirect(next_path)		
+				return HttpResponseRedirect('/')		
 	else:
 		form = Callorder()
 
 	return render(request,'callorder/call_order_form.html',
-					{'form':form,'next_path':next_path })
+					{'form':form,'gensetengines':gensetengines })
 
 class CertificateList(ListView, GensetengineListMixin):
 	model = Certificate
