@@ -1,0 +1,33 @@
+{% extends "common/__l_single_col.html" %}
+{% load bootstrap %}
+
+{% block content %}    
+    
+<div class = 'my-form'>
+  <div class="my-form-header">
+    {% if next_path %}
+    <a href="{{ next_path }}" type="button" class="close" ><span aria-hidden="true">&times;</span></a>
+    {% else %}
+    <a href="/" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+    {% endif %}
+    <h4 class="lead">ЗАКАЗАТЬ ОБРАТНЫЙ ЗВОНОК</h4>
+  </div>
+  <hr>
+
+  <form  action='/send-email/' method='post'>
+    {% csrf_token %}
+
+    {{form|bootstrap}}    
+
+    <div class="my-form-footer">
+    {% if next_path %}
+      <a href="{{ next_path }}" type="button" class="btn btn-default" >ЗАКРЫТЬ</a>
+      {% else %}
+      <a href="/" type="button" class="btn btn-default" >ЗАКРЫТЬ</a>
+      {% endif %}
+      <button type="submit" class="btn btn-success">ЗАКАЗАТЬ ЗВОНОК</button>
+    </div>
+  </form>
+
+</div>
+{% endblock %}

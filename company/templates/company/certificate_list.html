@@ -26,11 +26,14 @@
 	<br>
 	<div class="clearfix mosaicflow">
 		{% for item in object_list %}
+		{% comment %}
 		<div class="mosaicflow__item">
 			<a class="fancyimage" data-fancybox-group="group" title="{{item.certificate}}" href="{{item.certificate_2x.url}}">
 				<img src="{{item.certificate_1x.url}}" alt="">
 			</a>
 		</div>
+		{% endcomment %}
+		<img src="{{item.certificate_1x.url}}" alt="">
 		{% endfor %}
 
 	</div>

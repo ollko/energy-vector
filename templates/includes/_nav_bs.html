@@ -1,5 +1,5 @@
 {% load staticfiles %}
-{% include 'includes/_call_order_modal.html' %} 
+
 <nav class="navbar navbar-inverse navbar-fixed-top my-nav">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -70,13 +70,13 @@
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <!-- Button trigger modal -->
-          <button type="button" class="call-order btn btn-success" data-toggle="modal" data-target="#callOrder">
+        <div class="call-order">
+          <a href="/send-email/" type="button" class="btn btn-success">
             ЗАКАЗАТЬ ЗВОНОК
-          </button>
-
-        </li>
+          </a>
+        </div>
+          
+        
       </ul>
       <ul class="nav navbar-nav navbar-right head-contact-social">
       <div class="ya-share2" data-services="collections,vkontakte,facebook,odnoklassniki"></div>

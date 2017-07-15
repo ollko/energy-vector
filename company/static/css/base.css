@@ -79,13 +79,22 @@ img.grey-top-brand:hover{
 	background-image: radial-gradient(ellipse farthest-corner at righ*/t bottom, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
 }
 
-/*кнопка ЗАКАЗАТЬ ЗВОНОК*/
+/*кнопка ЗАКАЗАТЬ ЗВОНОК + форма ЗАКАЗАТЬ ЗВОНОК */
 .navbar-nav>li>a.call-order{
 
 	padding: 8px;
 }
-/* /кнопка ЗАКАЗАТЬ ЗВОНОК*/
-
+/* /кнопка ЗАКАЗАТЬ ЗВОНОК + форма ЗАКАЗАТЬ ЗВОНОК*/
+div.call-order{
+	padding: 8px 0;
+}
+div.my-form{
+	max-width: 400px;
+	margin: 2em auto;
+}
+/*div.my-form-header{
+	border-bottom: 1px #CCCCCC solid;*/
+}
 /* социальные иконки в верхнем меню*/
 .navbar-nav>li>a.icon-contact-social{
 

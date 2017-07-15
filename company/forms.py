@@ -39,8 +39,9 @@ class OtzivForm(forms.ModelForm):
 			
 class Callorder(forms.Form):
 
-	name = forms.CharField(label=u'ВАШЕ ИМЯ',max_length = 20)
+	name = forms.CharField(label=u'ВАШЕ ИМЯ',max_length = 20, initial = "ВАШЕ ИМЯ",)
 
-	phone_number=PhoneField(label = u'НОМЕР ТЕЛЕФОНА',code_length = 3, num_length = 7)
+	phone_number=forms.CharField(label = u'НОМЕР ТЕЛЕФОНА', max_length = 12, initial='+71234567890',)
 
-	question = forms.CharField(label=u'ВОПРОС',max_length = 1000, widget = forms.widgets.Textarea)
+	question = forms.CharField(label=u'ВОПРОС',max_length = 1000, 
+		widget = forms.widgets.Textarea, initial = 'ЖЕЛАТЕЛЬНО УКАЗАТЬ', required = False )

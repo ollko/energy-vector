@@ -27,6 +27,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrapform',
     'precise_bbcode',
     'company.apps.CompanyConfig',
     'catalog.apps.CatalogConfig',
