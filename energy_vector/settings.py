@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'precise_bbcode',
     'company.apps.CompanyConfig',
     'catalog.apps.CatalogConfig',
+    'services.apps.ServicesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

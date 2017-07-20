@@ -3,17 +3,13 @@ from django.shortcuts import render
 from .models import Genset, Gensetengine
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, ProcessFormView
-from django.views.generic.base import ContextMixin
+from generic.mixins import GensetengineListMixin
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # Create your views here.
 
-class GensetengineListMixin(ContextMixin):
-	def get_context_data(self, **kwargs):
-		context = super(GensetengineListMixin, self).get_context_data(**kwargs)
-		context["gensetengines"] = Gensetengine.objects.all()
-		return context
+
 
 class GensetList(ListView, GensetengineListMixin):
 	model = Genset

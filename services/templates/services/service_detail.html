@@ -1,0 +1,30 @@
+{% extends "common/__l_single_col.html" %}
+{% load bootstrap %}
+{% block title %}
+OOO "Вектор".{{service.name}}
+{% endblock %}
+{% block content %}
+<div class = 'container'>
+<div class="row catalog-fill">
+	<br>
+		{% if user.is_authenticated %}
+			{% if perms.services.add_service %}
+		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'services:service_create' %}" title="добавить новую услугу"><span class="glyphicon glyphicon-plus">добавить новую услугу</span></a>
+		</div>
+				{% if services|length %}
+		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'services:service_update' service.id %}" title="редактировать список услуг"><span class="glyphicon glyphicon-pencil">редактировать страницу услуги</span></a>
+		</div>
+		<div class="col-sm-3"><a class='certificate-menu' href="{% url 'services:service_delete' service.id %}" title="редактировать список услуг"><span class="glyphicon glyphicon-remove"></span>удалить услугу</span></a>
+		</div>
+				{% endif %}
+			{% endif %}
+		{% endif %}
+	</div>
+<h3>{{ service.name|upper }}</h3>
+{{ service.text.rendered }}
+<br>
+{% if service.link %}
+<a href="{{service.link}}" type="button" class="btn btn-default" >ЗАКАЗАТЬ УСЛУГУ</a>
+{% endif %}
+</div>
+{% endblock %}

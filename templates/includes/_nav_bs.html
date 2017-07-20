@@ -64,7 +64,25 @@
           </ul>
 
         </li>
-        <li><a href="#">УСЛУГИ</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">УСЛУГИ<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          {% if not services %}
+            {% if user.is_authenticated %}
+              {% if perms.services.add_service %}
+              <li><a href="/services/create/">ДОБАВИТЬ УСЛУГУ</a></li>
+              <li role="separator" class="divider"></li>
+              {% endif %}
+            {% endif %}
+          {% else %}
+          
+            {% for service  in services %}
+              <li><a  href="{% url 'services:service_detail' service.pk %}">{{service.name|upper}}</a></li>
+              <li class="divider"></li>
+            {% endfor %}
+          {% endif %}
+         
+          </ul>
+        </li>
         <li><a href="#">НОВОСТИ</a></li>
         <li><a href="#">БАЗА ЗНАНИЙ</a></li>
         

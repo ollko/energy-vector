@@ -1,0 +1,23 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div class = 'container'>
+<br>
+	<div class="row">
+	<h2>Вы действительно хотите удалить эту строку?</h2>
+		<br>
+
+	<div class="row">
+		<div class="col-sm-2">
+			<form action="" method="POST">
+				{% csrf_token %}
+				<input class="btn btn-warning" type="submit" action="" value="Да, удалить." />
+			</form>
+		</div>
+		<div class="col-sm-2">
+			<a class="btn btn-default" href="{{back_url}}" role="button">Нет, оставить.</a>
+		</div>
+	</div>	
+</div>
+{% endblock %}

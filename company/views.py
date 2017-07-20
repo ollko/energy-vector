@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 
-from django.contrib.auth.decorators import login_required,permission_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 
 from .models import Marka, Certificate, Otziv, Callorderuser
@@ -12,17 +12,24 @@ from django.views.generic import ListView
 from django.core.mail import send_mail, BadHeaderError
 
 from django.views.generic import TemplateView
-from catalog.views import GensetengineListMixin
+from generic.mixins import GensetengineListMixin
 
 import re
 
 
 # Create your views here.
-def index(request):
-	form = Callorder()
-	gensetengines = Gensetengine.objects.all()
-	return render(request, 'end_templates/index.html',
-				{'form':form, 'gensetengines':gensetengines})
+class DocumentsView(TemplateView, GensetengineListMixin):
+	template_name="end_templates/in_the_development.html"
+
+class SroView(TemplateView, GensetengineListMixin):
+	template_name="company/sro.html"
+
+class ContactsView(TemplateView, GensetengineListMixin):
+	template_name="company/contacts.html"
+				
+class MainPageView(TemplateView, GensetengineListMixin):
+	template_name = "end_templates/index.html"
+	
 
 def send_email(request):
 	gensetengines = Gensetengine.objects.all()
@@ -62,8 +69,6 @@ def send_email(request):
 class CertificateList(ListView, GensetengineListMixin):
 	model = Certificate
 	
-class SroView(TemplateView, GensetengineListMixin):
-	template_name="company/sro.html"
 
 class OtzivList(ListView, GensetengineListMixin):
 	'''Выводится страница с отзывами о компании

@@ -1,0 +1,24 @@
+{% extends "common/__l_single_col.html" %}
+{% load bootstrap %}
+
+{% block content %}
+<div class = 'container'>
+  <div class="my-form-header">
+    <a href="/" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+    <h4 class="lead">ДОБАВИТЬ/РЕДАКТИРОВАТЬ УСЛУГУ</h4>
+  </div>
+  <hr>
+<form  action="" method="post" >
+	
+    {% csrf_token %}
+
+    {{form|bootstrap}}   
+	<div class="my-form-footer">
+      <a href="/" type="button" class="btn btn-default" >ЗАКРЫТЬ</a>
+      <button type="submit" class="btn btn-success">ДОБАВИТЬ</button>
+    </div>
+	
+	
+</form>
+</div>
+{% endblock %}

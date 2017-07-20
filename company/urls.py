@@ -8,11 +8,11 @@ from django.contrib.auth import views as auth_views
 app_name = 'company'
 urlpatterns = [
 
-    url(r'^$', my_views.index,   name='index',),
+    url(r'^$', my_views.MainPageView.as_view(), name='main_page',),
 
     url(r'^send-email/$', my_views.send_email,   name='send_email',),
 
-    url(r'^sro/$', my_views.SroView.as_view(),),
+    url(r'^sro/$', my_views.SroView.as_view(), name='sro',),
 
     url(r'^certificates/$', my_views.CertificateList.as_view(), name='certificates'),
 
@@ -26,9 +26,9 @@ urlpatterns = [
     url(r'^otziv_corr/(?P<otziv_id>\d+)/$', my_views.otziv_corr_detail, name='otziv_corr_detail'),
     url(r'^otziv_del/$', my_views.otziv_list_del, name='otziv_del'),
 
-    url(r'^documents/$', TemplateView.as_view(template_name="end_templates/in_the_development.html"),),
+    url(r'^documents/$', my_views.DocumentsView.as_view(),),
 
-    url(r'^contacts/$', views.flatpage, {'url':'/contacts/'}, name='contacts'),
+    url(r'^contacts/$', my_views.ContactsView.as_view(),),
 
     url(r'^login/', auth_views.login,
         {"template_name":"end_templates/login.html"}, name='login'),
