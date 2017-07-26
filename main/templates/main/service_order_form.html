@@ -6,18 +6,18 @@
 <div class = 'my-form'>
   <div class="my-form-header">
     <a href="/" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-    <h4 class="lead">ЗАКАЗАТЬ ОБРАТНЫЙ ЗВОНОК</h4>
+    <h4 class="lead">{{form_title}}</h4>
   </div>
   <hr>
 
-  <form  action='/send-email/' method='post'>
+  <form  action='{{action_link}}' method='post'>
     {% csrf_token %}
 
     {{form|bootstrap}}    
 
     <div class="my-form-footer">
       <a href="/" type="button" class="btn btn-default" >ЗАКРЫТЬ</a>
-      <button type="submit" class="btn btn-success">ЗАКАЗАТЬ ЗВОНОК</button>
+      <button type="submit" class="btn btn-success">ОТПРАВИТЬ ЗАЯВКУ</button>
     </div>
   </form>
 

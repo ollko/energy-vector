@@ -22,14 +22,14 @@
         
         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">О НАС<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/sro/">СРО</a></li>
+            <li><a href="/company/sro/">СРО</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/certificates/">СЕРТИФИКАТЫ</a></li>
+            <li><a href="/company/certificates/">СЕРТИФИКАТЫ</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/otzivi/">НАС РЕКОМЕНДУЮТ</a></li>
+            <li><a href="/company/otzivi/">НАС РЕКОМЕНДУЮТ</a></li>
             <li role="separator" class="divider"></li>
             
-            <li><a href="/contacts/">КОНТАКТЫ</a></li>
+            <li><a href="/company/contacts/">КОНТАКТЫ</a></li>
           </ul>
         </li>
         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">КАТАЛОГ<span class="caret"></span></a>
@@ -89,7 +89,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <div class="call-order">
-          <a href="/send-email/" type="button" class="btn btn-success">
+          <a href="{% url 'main:call_order' %}" type="button" class="btn btn-success">
             ЗАКАЗАТЬ ЗВОНОК
           </a>
         </div>

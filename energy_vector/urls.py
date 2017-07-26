@@ -20,7 +20,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 
-	url(r'^', include("company.urls")),
+    url(r'^', include("main.urls")),
+	url(r'^company/', include("company.urls")),
 	url(r'^catalog/', include("catalog.urls")),
     url(r'^services/', include("services.urls")),
 

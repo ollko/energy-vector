@@ -1,39 +1,27 @@
 # coding=utf-8
 from django.conf.urls import url
-from . import views as my_views
-from django.contrib.flatpages import views
-from django.views.generic import TemplateView
-from django.contrib.auth import views as auth_views
+from . import views 
+
 
 app_name = 'company'
 urlpatterns = [
 
-    url(r'^$', my_views.MainPageView.as_view(), name='main_page',),
+    url(r'^sro/$', views.SroView.as_view(), name='sro',),
 
-    url(r'^send-email/$', my_views.send_email,   name='send_email',),
+    url(r'^certificates/$', views.CertificateList.as_view(), name='certificates'),
 
-    url(r'^sro/$', my_views.SroView.as_view(), name='sro',),
-
-    url(r'^certificates/$', my_views.CertificateList.as_view(), name='certificates'),
-
-    url(r'^certificates_new/$', my_views.certificates_new, name='certificates_new'),
-    url(r'^certificate_list_del/$', my_views.certificate_list_del, name='certificate_list_del'),
+    url(r'^certificates_new/$', views.certificates_new, name='certificates_new'),
+    url(r'^certificate_list_del/$', views.certificate_list_del, name='certificate_list_del'),
 
 
-    url(r'^otzivi/$', my_views.OtzivList.as_view(), name='otzivi'),
-    url(r'^otzivi_new/$', my_views.otziv_new, name='otziv_new'),
-    url(r'^otziv_corr/$', my_views.OtzivCorr.as_view(), name='otziv_corr'),
-    url(r'^otziv_corr/(?P<otziv_id>\d+)/$', my_views.otziv_corr_detail, name='otziv_corr_detail'),
-    url(r'^otziv_del/$', my_views.otziv_list_del, name='otziv_del'),
+    url(r'^otzivi/$', views.OtzivList.as_view(), name='otzivi'),
+    url(r'^otzivi_new/$', views.otziv_new, name='otziv_new'),
+    url(r'^otziv_corr/$', views.OtzivCorr.as_view(), name='otziv_corr'),
+    url(r'^otziv_corr/(?P<otziv_id>\d+)/$', views.otziv_corr_detail, name='otziv_corr_detail'),
+    url(r'^otziv_del/$', views.otziv_list_del, name='otziv_del'),
 
-    url(r'^documents/$', my_views.DocumentsView.as_view(),),
+    url(r'^documents/$', views.DocumentsView.as_view(),),
 
-    url(r'^contacts/$', my_views.ContactsView.as_view(),),
-
-    url(r'^login/', auth_views.login,
-        {"template_name":"end_templates/login.html"}, name='login'),
-
-    url(r'^logout/', auth_views.logout, 
-        name='logout'),
+    url(r'^contacts/$', views.ContactsView.as_view(),),
 
 ]
