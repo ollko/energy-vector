@@ -37,7 +37,19 @@
 	</head>
 
 <body>
-	<header>
+	<header>	
+		{% if messages %}
+		    <div class="success-messages">
+	    		<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				
+		            {% for message in messages %}
+		            <div class="success-message">
+			            <p class="text-center">{{ message }}</p>
+		            </div>
+		            {% endfor %}
+
+		    </div>
+		{% endif %}
 		{% block navigation %}
 			
 

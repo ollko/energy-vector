@@ -126,3 +126,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')
 LOGIN_URL='company:login'
 LOGOUT_URL='company:logout'
 LOGIN_REDIRECT_URL='company:sertificates'
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

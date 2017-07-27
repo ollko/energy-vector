@@ -1,16 +1,6 @@
 # coding=utf-8
 from django import forms
-# from .widgets import MultiFileInput, PhoneField
-
-
-# from django.core.exceptions import ValidationError
-
-# def validate_images_format(file_instance):
-
-# 	if file_instance.content_type=='image/jpeg':
-# 		print 'file_instance.content_type=',file_instance.content_type
-		
-# 		raise ValidationError("Файл в 'jpeg' формате нельзя загрузить на сайт!")
+from django.core.mail import send_mail, BadHeaderError
 
 			
 class Callorder(forms.Form):
@@ -22,6 +12,22 @@ class Callorder(forms.Form):
 	question = forms.CharField(label=u'ВОПРОС',max_length = 1000, 
 		widget = forms.widgets.Textarea, initial = 'ЖЕЛАТЕЛЬНО УКАЗАТЬ', required = False )
 
+	def send_email(self):
+
+		name = self.cleaned_data['name']
+		phone_number = self.cleaned_data['phone_number']
+		question = self.cleaned_data['question']
+		if not question:
+			question = u'У матросов нет вопросов.'
+		if name and phone_number:
+			text = u'Кому позвонить: '+unicode(name)+u"\nTелефон: "+phone_number+u'\nВопрос: '+question
+			mail_title = u'Заявка на обратный звонок'
+			try:
+				send_mail(mail_title, text, 'energy-vector@energy-vector.ru',
+					    ['korotkaya.olga@yandex.ru',], fail_silently=False)
+			except  BadHeaderError:
+				return HttpResponse('Invalid header found.')
+		pass
 
 class MaintenanceOrder(forms.Form):
 
@@ -29,7 +35,7 @@ class MaintenanceOrder(forms.Form):
 
 	phone_number=forms.CharField(label = u'НОМЕР ТЕЛЕФОНА:', max_length = 12, initial='+71234567890',)
 
-	model = forms.CharField(label=u'МОДЕЛЬ ОБОРУДОВАНИЯ:',max_length = 100, initial = "УКАЖИТЕ МОДЕЛЬ ОБОРУДОВАНИЯ")
+	model = forms.CharField(label=u'МОДЕЛЬ ОБОРУДОВАНИЯ:',max_length = 100, initial = "УКАЖИТЕ ЕСЛИ ВОЗМОЖНО")
 
 	place = forms.CharField(label=u'ВАШ РЕГИОН:', max_length = 100, initial = "ГДЕ НАХОДИТСЯ ОБОРУДОВАНИЕ",)
 
@@ -42,7 +48,7 @@ class RepairOrder(forms.Form):
 
 	phone_number=forms.CharField(label = u'НОМЕР ТЕЛЕФОНА:', max_length = 12, initial='+71234567890',)
 
-	model = forms.CharField(label=u'МОДЕЛЬ ОБОРУДОВАНИЯ:',max_length = 100, initial = "УКАЖИТЕ МОДЕЛЬ ОБОРУДОВАНИЯ")
+	model = forms.CharField(label=u'МОДЕЛЬ ОБОРУДОВАНИЯ:',max_length = 100, initial = "УКАЖИТЕ ЕСЛИ ВОЗМОЖНО")
 
 	place = forms.CharField(label=u'ВАШ РЕГИОН:', max_length = 100, initial = "ГДЕ НАХОДИТСЯ ОБОРУДОВАНИЕ",)
 

@@ -8,7 +8,7 @@ urlpatterns = [
 
 	url(r'^$', views.MainPageView.as_view(), name='main_page',),
 
-	url(r'^call_order/$', views.call_order,   name='call_order',),
+	url(r'^call_order/$', views.CallorderFormView.as_view(),   name='call_order',),
 	
 	url(r'^maintenance_order_dgu/$', views.maintenance_order_dgu,   name='maintenance_order_dgu',),
 

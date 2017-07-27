@@ -2,51 +2,31 @@
 from django.shortcuts import render
 from .forms import Callorder, MaintenanceOrder, RepairOrder
 from django.views.generic import TemplateView
+from django.views.generic.edit import FormView
+from django.contrib.messages.views import SuccessMessageMixin
 from generic.mixins import GensetengineListMixin
 from catalog.models import Gensetengine
 from services.models import Service
-from django.core.mail import send_mail, BadHeaderError
+
 
 # Create your views here.
 class MainPageView(TemplateView, GensetengineListMixin):
-	template_name = "end_templates/index.html"
+	template_name = "main/index.html"
 
-def call_order(request):
-	gensetengines = Gensetengine.objects.all()
-	services = Service.objects.all()
-
-	# путь для перенаправления при успешной отправке письма, или при отказе от заказа звонка:
+class CallorderFormView(SuccessMessageMixin, FormView, GensetengineListMixin):
 	
-	# next_path = request.META.get('HTTP_REFERER','/')
-	    # if this is a POST request we need to process the form data
-	if request.method == 'POST':
-		# create a form instance and populate it with data from the request:
-		form = Callorder(request.POST)
-		# check whether it's valid:
-		if form.is_valid():
-            # process the data in form.cleaned_data as required
-			# print 'form.cleaned_data= ',form.cleaned_data
-			name = form.cleaned_data['name']
-			phone_number = form.cleaned_data['phone_number']
-			question = form.cleaned_data['question']
-			if not question:
-				question = u'У матросов нет вопросов.'
-			if name and phone_number and question:
-				text = u'Кому позвонить: '+unicode(name)+u"\nTелефон: "+phone_number+u'\nВопрос: '+question
-				try:
-					send_mail(u'Заявка на обратный звонок', text, 'energy-vector@energy-vector.ru',
-						    ['korotkaya.olga@yandex.ru','lnv@energy-vector.ru'], fail_silently=False)
-				except  BadHeaderError:
-					return HttpResponse('Invalid header found.')
-				
-				# redirect to a new URL:
+	template_name = 'main/call_order_form.html'
+	form_class = Callorder
+	success_url = '/'
+	success_message = 'Ваша заявка на обратный звонок успешно отправлена !!!' 
+	
 
-				return HttpResponseRedirect('/')		
-	else:
-		form = Callorder()
-
-	return render(request,'main/call_order_form.html',
-					{'form':form,'gensetengines':gensetengines,'services':services })
+	def form_valid(self, form):
+		form.send_email()
+		# This method is called when valid form_class data has been POSTed.
+        # It should return an HttpResponse.
+        
+		return super(CallorderFormView, self).form_valid(form)
 
 
 def maintenance_order_dgu(request):
