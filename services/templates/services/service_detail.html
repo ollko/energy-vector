@@ -20,11 +20,13 @@ OOO "Вектор".{{service.name}}
 			{% endif %}
 		{% endif %}
 	</div>
-<h3>{{ service.name|upper }}</h3>
-{{ service.text.rendered }}
-<br>
-{% if service.link %}
+<h3 class="text-success"><b>{{ service.name|upper }}</b></h3>
 <hr>
+
+<div class="service-text">{{ service.text.rendered }}</div>
+<hr>
+{% if service.link %}
+
 <a href="{{service.link}}" type="button" class="btn btn-success" >{{service.get_link_display}}</a>
 {% endif %}
 </div>

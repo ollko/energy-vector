@@ -29,7 +29,7 @@ class Callorder(forms.Form):
 				return HttpResponse('Invalid header found.')
 		pass
 
-class MaintenanceOrder(forms.Form):
+class ServiceOrder(forms.Form):
 
 	name = forms.CharField(label=u'ВАШЕ ИМЯ:',max_length = 20, initial = "ВАШЕ ИМЯ",)
 
@@ -39,18 +39,58 @@ class MaintenanceOrder(forms.Form):
 
 	place = forms.CharField(label=u'ВАШ РЕГИОН:', max_length = 100, initial = "ГДЕ НАХОДИТСЯ ОБОРУДОВАНИЕ",)
 
-	questions = forms.CharField(label=u'ВАШИ ВОПРОСЫ ПО ТЕХ ОБСЛУЖИВАНИЮ:',max_length = 1000, 
-		widget = forms.widgets.Textarea, initial = 'ВАШИ ВОПРОСЫ', required = False )
+	questions = forms.CharField(label=u'ВАШИ ВОПРОСЫ:',max_length = 1000, 
+		widget = forms.widgets.Textarea, initial = 'ВАШИ ВОПРОСЫ', required = False )	
 
-class RepairOrder(forms.Form):
+	def send_email(self, equipment_type, service_type):
+		name = self.cleaned_data['name']
+		phone_number = self.cleaned_data['phone_number']
+		
+		model = self.cleaned_data['model']
 
-	name = forms.CharField(label=u'ВАШЕ ИМЯ:',max_length = 20, initial = "ВАШЕ ИМЯ",)
+		place = self.cleaned_data['place']
 
-	phone_number=forms.CharField(label = u'НОМЕР ТЕЛЕФОНА:', max_length = 12, initial='+71234567890',)
+		questions = self.cleaned_data['questions']
 
-	model = forms.CharField(label=u'МОДЕЛЬ ОБОРУДОВАНИЯ:',max_length = 100, initial = "УКАЖИТЕ ЕСЛИ ВОЗМОЖНО")
+		if not questions:
+			questions = u'Свяжитесь с нами и все узнаете.'
+		if name and phone_number:
+			text = u'Меня зовут: '+name+u"\nПерезвоните мне на номер: "+phone_number
+			
+			if model:
+				text+=(u"\nМодель "+": "+model)
+			if place:
+				text+=(u'\nМестоположение '+equipment_type+": "+place)
+			text+=u'\nВопросы по '+service_type+u' '+equipment_type+u": "+questions
+			title = u'Заявка на '+service_type+u' '+equipment_type
+			try:
+				send_mail(title, text, 'energy-vector@energy-vector.ru',
+					    ['korotkaya.olga@yandex.ru',], fail_silently=False)
+			except  BadHeaderError:
+				return HttpResponse('Invalid header found.')
+		pass
+# class MaintenanceOrder(forms.Form):
 
-	place = forms.CharField(label=u'ВАШ РЕГИОН:', max_length = 100, initial = "ГДЕ НАХОДИТСЯ ОБОРУДОВАНИЕ",)
+# 	name = forms.CharField(label=u'ВАШЕ ИМЯ:',max_length = 20, initial = "ВАШЕ ИМЯ",)
 
-	questions = forms.CharField(label=u'ОПИШИТЕ ПРОБЛЕМУ:',max_length = 1000, 
-		widget = forms.widgets.Textarea, initial = 'ХОРОШО БЫ ЗАПОЛНИТЬ', required = False )
+# 	phone_number=forms.CharField(label = u'НОМЕР ТЕЛЕФОНА:', max_length = 12, initial='+71234567890',)
+
+# 	model = forms.CharField(label=u'МОДЕЛЬ ОБОРУДОВАНИЯ:',max_length = 100, initial = "УКАЖИТЕ ЕСЛИ ВОЗМОЖНО")
+
+# 	place = forms.CharField(label=u'ВАШ РЕГИОН:', max_length = 100, initial = "ГДЕ НАХОДИТСЯ ОБОРУДОВАНИЕ",)
+
+# 	questions = forms.CharField(label=u'ВАШИ ВОПРОСЫ ПО ТЕХ ОБСЛУЖИВАНИЮ:',max_length = 1000, 
+# 		widget = forms.widgets.Textarea, initial = 'ВАШИ ВОПРОСЫ', required = False )
+
+# class RepairOrder(forms.Form):
+
+# 	name = forms.CharField(label=u'ВАШЕ ИМЯ:',max_length = 20, initial = "ВАШЕ ИМЯ",)
+
+# 	phone_number=forms.CharField(label = u'НОМЕР ТЕЛЕФОНА:', max_length = 12, initial='+71234567890',)
+
+# 	model = forms.CharField(label=u'МОДЕЛЬ ОБОРУДОВАНИЯ:',max_length = 100, initial = "УКАЖИТЕ ЕСЛИ ВОЗМОЖНО")
+
+# 	place = forms.CharField(label=u'ВАШ РЕГИОН:', max_length = 100, initial = "ГДЕ НАХОДИТСЯ ОБОРУДОВАНИЕ",)
+
+# 	questions = forms.CharField(label=u'ОПИШИТЕ ПРОБЛЕМУ:',max_length = 1000, 
+# 		widget = forms.widgets.Textarea, initial = 'ХОРОШО БЫ ЗАПОЛНИТЬ', required = False )

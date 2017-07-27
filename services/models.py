@@ -5,10 +5,14 @@ from django.db import models
 from precise_bbcode.fields import BBCodeTextField
 
 LINKS = (('/call_order/', 'ЗАКАЗАТЬ ЗВОНОК'),
-		('/maintenance_order_dgu/', 'ЗАКАЗАТЬ ТЕХОБСЛУЖИВАНИЕ ДГУ'),
-		('/maintenance_order_ups/', 'ЗАКАЗАТЬ ТЕХОБСЛУЖИВАНИЕ ИБП'),
-		('/repair_order_dgu/','ЗАКАЗАТЬ РЕМОНТ ДГУ'),
-		('/repair_order_ups/','ЗАКАЗАТЬ РЕМОНТ ИБП'),)
+		# ('/maintenance_order_dgu/', 'ЗАКАЗАТЬ ТЕХОБСЛУЖИВАНИЕ ДГУ'),
+		# ('/maintenance_order_ups/', 'ЗАКАЗАТЬ ТЕХОБСЛУЖИВАНИЕ ИБП'),
+		# ('/repair_order_dgu/','ЗАКАЗАТЬ РЕМОНТ ДГУ'),
+		# ('/repair_order_ups/','ЗАКАЗАТЬ РЕМОНТ ИБП'),
+		('/order/maintenance/dgu/', 'ЗАКАЗАТЬ ТЕХОБСЛУЖИВАНИЕ ДГУ'),
+		('/order/maintenance/ups/', 'ЗАКАЗАТЬ ТЕХОБСЛУЖИВАНИЕ ИБП'),
+		('/order/repair/dgu/','ЗАКАЗАТЬ РЕМОНТ ДГУ'),
+		('/order/repair/ups/','ЗАКАЗАТЬ РЕМОНТ ИБП'),)
 # Create your models here.
 class Service(models.Model):
 	name = models.CharField(verbose_name = 'УСЛУГА', max_length=80, unique = True,)

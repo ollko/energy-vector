@@ -1,13 +1,13 @@
 # coding=utf-8
-from django.shortcuts import render
-from .forms import Callorder, MaintenanceOrder, RepairOrder
+from django.shortcuts import render, HttpResponseRedirect
+from .forms import Callorder, ServiceOrder
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.contrib.messages.views import SuccessMessageMixin
 from generic.mixins import GensetengineListMixin
 from catalog.models import Gensetengine
 from services.models import Service
-
+from django.core.mail import send_mail, BadHeaderError
 
 # Create your views here.
 class MainPageView(TemplateView, GensetengineListMixin):
@@ -28,202 +28,52 @@ class CallorderFormView(SuccessMessageMixin, FormView, GensetengineListMixin):
         
 		return super(CallorderFormView, self).form_valid(form)
 
+class ServiceOrderFormView(SuccessMessageMixin, FormView,  GensetengineListMixin):
+	
+	template_name = 'main/service_order_form.html'
+	form_class = ServiceOrder
+	success_url = '/'
+	success_message = 'Ваша заявка на успешно отправлена !!!' 
+	
+	SERVICE_TYPES = {
+		'maintenance':'ТЕХОБСЛУЖИВАНИЕ',
+		'repair':'РЕМОНТ',
+		'dgu':'ДГУ',
+		'ups':'ИБП'
+	}
+	serv_type = None
+	equip_type = None
+	def get(self, request, *args, **kwargs):
+	    self.serv_type = self.kwargs['serv_type']
+	    self.equip_type = self.kwargs['equip_type']
+	    return super(ServiceOrderFormView, self).get(request, *args, **kwargs)
 
-def maintenance_order_dgu(request):
-	gensetengines = Gensetengine.objects.all()
-	services = Service.objects.all()
-	form_title =u'ЗАЯВКА НА ТЕХОБСЛУЖИВАНИЕ ДГУ'
-	action_link ='/maintenance_order_dgu/'
+	def get_context_data(self, **kwargs):
+		context = super(ServiceOrderFormView, self).get_context_data(**kwargs)
+		print 'context =', context
 
-	if request.method == 'POST':
-		# create a form instance and populate it with data from the request:
-		form = MaintenanceOrder(request.POST)
-		# check whether it's valid:
-		if form.is_valid():
-            # process the data in form.cleaned_data as required
-			# print 'form.cleaned_data= ',form.cleaned_data
-			name = form.cleaned_data['name']
-			phone_number = form.cleaned_data['phone_number']
-			
-			model = form.cleaned_data['model']
+		context['serv_type_ru'] = self.SERVICE_TYPES[self.serv_type]
+		context['equip_type_ru'] = self.SERVICE_TYPES[self.equip_type]
+		context['serv_type'] = self.serv_type
+		context['equip_type'] = self.equip_type
 
-			place = form.cleaned_data['place']
+		return context
 
-			questions = form.cleaned_data['questions']
+	def post(self, request, *args, **kwargs):
+	    """
+	    Handles POST requests, instantiating a form instance with the passed
+	    POST variables and then checked for validity.
+	    """
+	    form_class = self.get_form_class()
+	    form = self.get_form(form_class)
+	    if form.is_valid():
+	    	x=self.SERVICE_TYPES[self.kwargs['equip_type']].decode('utf-8')
+	    	y = self.SERVICE_TYPES[self.kwargs['serv_type']].decode('utf-8')
+	    	print 'type(x)=',type(x)
+	    	print 'type(y)=',type(y)
 
-			if not questions:
-				questions = u'Свяжитесь с нами и все узнаете.'
-			if name and phone_number:
-				text = u'Меня зовут: '+name+u"\nпрошу Вас перезвонить мне на номер: "+phone_number
-				
-				if model:
-					text+=(u"модель ДГУ: "+model)
-				if place:
-					text+=(u'Местоположение ДГУ: '+place)
-				text+=(u'Вопросы по техобслуживанию ДГУ:'+u'\n'+questions)
-				title = u'Заявка на техобслуживание ДГУ'
-				try:
-					send_mail(title, text, 'energy-vector@energy-vector.ru',
-						    ['korotkaya.olga@yandex.ru',], fail_silently=False)
-				except  BadHeaderError:
-					return HttpResponse('Invalid header found.')
-				
-				# redirect to a new URL:
+	    	form.send_email(x,y)
+	        return self.form_valid(form)
+	    else:
+	        return self.form_invalid(form)
 
-				return HttpResponseRedirect('/')		
-	else:
-		form = MaintenanceOrder()
-		
-	return render(request,'main/service_order_form.html',
-					{'form':form, 'form_title':form_title, 'action_link':action_link,
-					'gensetengines':gensetengines,'services':services })
-
-def maintenance_order_ups(request):
-	gensetengines = Gensetengine.objects.all()
-	services = Service.objects.all()
-	form_title =u'ЗАЯВКА НА ТЕХОБСЛУЖИВАНИЕ ИБП'
-	action_link ='/maintenance_order_ups/'
-
-	if request.method == 'POST':
-		# create a form instance and populate it with data from the request:
-		form = MaintenanceOrder(request.POST)
-		# check whether it's valid:
-		if form.is_valid():
-            # process the data in form.cleaned_data as required
-			# print 'form.cleaned_data= ',form.cleaned_data
-			name = form.cleaned_data['name']
-			phone_number = form.cleaned_data['phone_number']
-			
-			model = form.cleaned_data['model']
-
-			place = form.cleaned_data['place']
-
-			questions = form.cleaned_data['questions']
-
-			if not questions:
-				questions = u'Свяжитесь с нами и все узнаете.'
-			if name and phone_number:
-				text = u'Меня зовут: '+name+u"\nпрошу Вас перезвонить мне на номер: "+phone_number
-				
-				if model:
-					text+=(u"модель ИБП: "+model)
-				if place:
-					text+=(u'Местоположение ИБП: '+place)
-				text+=(u'Вопросы по техобслуживанию ИБП:'+u'\n'+questions)
-				title = u'Заявка на техобслуживание ИБП '
-				try:
-					send_mail(title, text, 'energy-vector@energy-vector.ru',
-						    ['korotkaya.olga@yandex.ru',], fail_silently=False)
-				except  BadHeaderError:
-					return HttpResponse('Invalid header found.')
-				
-				# redirect to a new URL:
-
-				return HttpResponseRedirect('/')		
-	else:
-		form = MaintenanceOrder()
-
-	return render(request,'main/service_order_form.html',
-					{'form':form, 'form_title':form_title, 'action_link':action_link,
-					'gensetengines':gensetengines,'services':services })
-
-
-def repair_order_dgu(request):
-	gensetengines = Gensetengine.objects.all()
-	services = Service.objects.all()
-	action_link ='/repair_order_dgu/'
-	form_title ='ЗАЯВКА НА РЕМОНТ ДГУ'
-
-	if request.method == 'POST':
-		# create a form instance and populate it with data from the request:
-		form = RepairOrder(request.POST)
-		# check whether it's valid:
-		if form.is_valid():
-            # process the data in form.cleaned_data as required
-			# print 'form.cleaned_data= ',form.cleaned_data
-			name = form.cleaned_data['name']
-			phone_number = form.cleaned_data['phone_number']
-			
-			model = form.cleaned_data['model']
-
-			place = form.cleaned_data['place']
-
-			questions = form.cleaned_data['questions']
-
-			if not questions:
-				questions = u'Свяжитесь с нами и все узнаете.'
-			if name and phone_number:
-				text = u'Меня зовут: '+name+u"\nпрошу Вас перезвонить мне на номер: "+phone_number
-				if model:
-					text+=(u"\nМодель оборудования: "+model)
-				if place:
-					text+=(u'\nМестоположение оборудования: '+place)
-				if questions:
-					text+=(u'\nЧто случилось с ДГУ: '+u'\n'+questions)
-				title=u'Заявка на ремонт ДГУ'
-				try:
-					send_mail(title, text, 'energy-vector@energy-vector.ru',
-						    ['korotkaya.olga@yandex.ru',], fail_silently=False)
-				except  BadHeaderError:
-					return HttpResponse('Invalid header found.')
-				
-				# redirect to a new URL:
-
-				return HttpResponseRedirect('/')		
-	else:
-		form = RepairOrder()
-		
-		
-	return render(request,'main/service_order_form.html',
-					{'form':form, 'form_title':form_title, 'action_link':action_link,
-					'gensetengines':gensetengines,'services':services })
-
-
-def repair_order_ups(request):
-	gensetengines = Gensetengine.objects.all()
-	services = Service.objects.all()
-	form_title =u'ЗАЯВКА НА РЕМОНТ ИБП'
-	action_link ='/repair_order_ups/'
-
-	if request.method == 'POST':
-		# create a form instance and populate it with data from the request:
-		form = RepairOrder(request.POST)
-		# check whether it's valid:
-		if form.is_valid():
-            # process the data in form.cleaned_data as required
-			# print 'form.cleaned_data= ',form.cleaned_data
-			name = form.cleaned_data['name']
-			phone_number = form.cleaned_data['phone_number']
-			
-			model = form.cleaned_data['model']
-
-			place = form.cleaned_data['place']
-
-			questions = form.cleaned_data['questions']
-
-			if not questions:
-				questions = u'Свяжитесь с нами и все узнаете.'
-			if name and phone_number:
-				text = u'Меня зовут: '+name+u"\nпрошу Вас перезвонить мне на номер: "+phone_number
-				if model:
-					text+=(u"\nМодель оборудования: "+model)
-				if place:
-					text+=(u'\nМестоположение оборудования: '+place)
-				if questions:
-					text+=(u'\nЧто случилось с ИБП: '+u'\n'+questions)
-				title=u'Заявка на ремонт ИБП'
-				try:
-					send_mail(title, text, 'energy-vector@energy-vector.ru',
-						    ['korotkaya.olga@yandex.ru',], fail_silently=False)
-				except  BadHeaderError:
-					return HttpResponse('Invalid header found.')
-				
-				# redirect to a new URL:
-
-				return HttpResponseRedirect('/')		
-	else:
-		form = RepairOrder()
-		
-	return render(request,'main/service_order_form.html',
-					{'form':form, 'form_title':form_title, 'action_link':action_link,
-					'gensetengines':gensetengines,'services':services })

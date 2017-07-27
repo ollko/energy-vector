@@ -6,11 +6,10 @@
 <div class = 'my-form'>
   <div class="my-form-header">
     <a href="/" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-    <h4 class="lead">{{form_title}}</h4>
+    <h4 class="lead">ЗАЯВКА НА {{serv_type_ru}} {{equip_type_ru}}</h4>
   </div>
   <hr>
-
-  <form  action='{{action_link}}' method='post'>
+  <form  action='{% url "main:service_order1" serv_type equip_type %}' method='post'>
     {% csrf_token %}
 
     {{form|bootstrap}}    
