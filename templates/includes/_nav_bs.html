@@ -76,7 +76,7 @@
           {% else %}
           
             {% for service  in services %}
-              <li><a  href="{% url 'services:service_detail' service.pk %}">{{service.name|upper}}</a></li>
+              <li><a  href="{% url 'services:service_detail' service.pk %}">{{service.serv_name}}</a></li>
               <li class="divider"></li>
             {% endfor %}
           {% endif %}

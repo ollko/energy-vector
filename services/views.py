@@ -33,7 +33,7 @@ class ServiceUpdate(PermissionRequiredMixin, UpdateView, GensetengineListMixin):
 class ServiceDelete(PermissionRequiredMixin, DeleteView, GensetengineListMixin):
 	permission_required = 'service.can_delete'
 	model = Service
-	success_url = reverse_lazy('company:main_page')
+	success_url = reverse_lazy('main:main_page')
 	def get_context_data(self, **kwargs):
 		context = super(ServiceDelete, self).get_context_data(**kwargs)
 		context['back_url'] = '/services/'+ self.kwargs['pk']

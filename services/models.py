@@ -20,7 +20,7 @@ class Service(models.Model):
 	
 
 	def __unicode__(self):
-		return self.name
+		return self.serv_name
 
 	def get_absolute_url(self):
 		return u'/services/%d' % self.id 
