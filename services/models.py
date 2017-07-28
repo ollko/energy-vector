@@ -11,7 +11,7 @@ LINKS = (('/call_order/', 'ЗАКАЗАТЬ ЗВОНОК'),
 		('/order/repair/ups/','ЗАКАЗАТЬ РЕМОНТ ИБП'),)
 # Create your models here.
 class Service(models.Model):
-	name = models.CharField(verbose_name = 'УСЛУГА', max_length=80, unique = True,)
+	serv_name = models.CharField(verbose_name = 'УСЛУГА', max_length=80, unique = True,)
 	text = BBCodeTextField(verbose_name = 'ТЕКСТ ДЛЯ СТРАНИЦЫ УСЛУГИ',
 								blank=True, null=True, default=None,)
 
