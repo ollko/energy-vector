@@ -24,6 +24,11 @@
 			<link rel="stylesheet" type="text/css" href="{% static 'css/1.css' %}" >
 			<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
 		{% endblock %}
+			
+		{% block metrika %}
+<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter45454278 = new Ya.Metrika({ id:45454278, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/45454278" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+		{% endblock %}
+		
 			<title>
 		{% block title %}Дизельгенераторы, ИБП, продажа, монтаж, ремонт и техническое обслуживание.{% endblock %}			
 			</title>
@@ -48,18 +53,7 @@
 		            </div>
 		            {% endfor %}
             </div>
-{% comment %}
-		    <div class="success-messages">
-	    		<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				
-		            {% for message in messages %}
-		            <div class="success-message">
-			            <p class="text-center">{{ message }}</p>
-		            </div>
-		            {% endfor %}
 
-		    </div>
-{% endcomment %}
 		{% endif %}
 		{% block navigation %}
 			
