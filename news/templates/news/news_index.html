@@ -1,0 +1,46 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  {{ block.super }}
+  Новости
+{% endblock %}
+
+{% block content %}
+  {% include "includes/_messages.html" %}
+<div class = 'container'>
+<br>
+{% if perms.news.add_new %}
+    <p><a href="{% url "news:news_add" %}"><span class="glyphicon glyphicon-plus">добавить новость</span></a></p>
+  {% endif %}
+  <h3 class="text-success"><b>НОВОСТИ КОМПАНИИ</b></h3>
+  
+
+  {% comment %}
+  <div class="feeds">
+    <a href="{% url "news_feed_rss" %}" target="_blank"><img src="{% static "rss.png" %}"></a>
+    <a href="{% url "news_feed_atom" %}" target="_blank"><img src="{% static "atom.png" %}"></a>
+  </div>
+  {% endcomment %}
+
+  {% for object in latest %}
+  <div>
+    <h4><a href="{% url "news:news_detail" pk=object.pk %}?page={{ page_obj.number }}">{{ object.title|upper }}</a></h4>
+    <p class="posted"><em>{{ object.posted|date:"j.m.Y H:i:s" }}</em></p>
+    <p>{{ object.description}}</p>
+    
+    <p class="buttons bottom-indent">
+    {% if perms.news.change_new %}
+    <a href="{% url "news:news_edit" pk=object.pk %}?page={{ page_obj.number }}">Изменить</a>
+    {% endif %}
+    {% if perms.news.delete_new %}
+    <a href="{% url "news:news_delete" pk=object.pk %}?page={{ page_obj.number }}">Удалить</a>
+    {% endif %}
+    </p>
+    <hr>
+  </div>
+
+  {% endfor %}
+  {% include "includes/_pagination.html" %}
+</div>
+{% endblock %}

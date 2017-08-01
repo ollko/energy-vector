@@ -1,0 +1,19 @@
+{% extends "common/__l_single_col.html" %}
+{% load bbcode_tags %}
+
+{% block title %}
+	{{ block.super }}
+	{{ object.title }}
+{% endblock %}
+
+{% block content %}
+<div class = 'container new'>
+
+  <h3 class="text-success">{{ object.title }}</h3 class="l">
+  <p class="posted"><em>{{ object.posted|date:"j.m.Y H:i:s" }}</em></p>
+
+  <div>{{ object.content|bbcode|safe }}</div>
+  <br>
+  <p><a href="{% url "news:news_index" %}?page={{ pn }}"><span class="glyphicon glyphicon-chevron-left">Назад</span></a></p>
+</div>
+{% endblock %}

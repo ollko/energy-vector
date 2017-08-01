@@ -1,0 +1,38 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+
+{% load bootstrap %}
+
+{% block title %}
+  {{ block.super }}
+  Добавление новости
+{% endblock %}
+
+{% block javascript %}
+  {{ block.super }}	
+	<script src="{% static "js/imagepool.js" %}" type="text/javascript"></script>
+  
+{% endblock %}
+
+{% block content%}
+
+<div class = 'container'>
+  <div class="my-form-header">
+    <a href="{% url "news:news_index" %}" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+    <h4 class="lead">ДОБАВИТЬ НОВОСТЬ</h4>
+  </div>
+  <hr>
+<form  action="" method="post" >
+    {% csrf_token %}
+
+    {{form|bootstrap}}   
+  <div class="my-form-footer">
+      <a href="{% url "news:news_index" %}" type="button" class="btn btn-default">ЗАКРЫТЬ</a>
+      <button type="submit" class="btn btn-success">СОХРАНИТЬ</button>
+    </div> 
+</form>
+{% include "includes/_file_lister.html" %}
+</div>
+
+
+{% endblock %}

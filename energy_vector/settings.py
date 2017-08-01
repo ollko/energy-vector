@@ -29,7 +29,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'bootstrapform',
     'precise_bbcode',
+    'news.apps.NewsConfig',
     'main.apps.MainConfig',
+    'imagepool.apps.ImagepoolConfig',
     'company.apps.CompanyConfig',
     'catalog.apps.CatalogConfig',
     'services.apps.ServicesConfig',

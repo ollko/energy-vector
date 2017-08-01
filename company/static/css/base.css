@@ -1,9 +1,47 @@
+
 /*@media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  {
 Не отображать облако меток в заголовке сайта в телефоне
 div.tag-cloud{
 	display: none;
 }
 }*/
+/*___________РАЗДЕЛ НОВОСТИ_______________*/
+
+div.container.new img{
+	width: 50%;
+}
+/*___________РАЗДЕЛ НОВОСТИ_______________*/
+
+/*___________РАЗДЕЛ IMAGEPOOL_____________*/
+
+#imagepool_output {
+  display: none;
+}
+#imagepool_image_list {
+  margin-top: 60px;
+}
+#imagepool_image_list td {
+  text-align: center;
+  width: 160px;
+  height: 120px;
+}
+#imagepool_image_list td.link {
+  font-size: xx-large;
+  width: 20px;
+}
+#imagepool_image_list td img {
+  max-width: 160px;
+  max-height: 100px;
+}
+#imagepool_image_list td a:link, #imagepool_image_list td a:visited,
+#imagepool_image_list td a:active, #imagepool_image_list td a:hover{
+  text-decoration: none;
+}
+#imagepool_image_list td a.disabled:link, #imagepool_image_list td a.disabled:visited,
+#imagepool_image_list td a.disabled:active, #imagepool_image_list td a.disabled:hover{
+  display: none;
+  }
+/*___________РАЗДЕЛ IMAGEPOOL_____________*/
 
 /*___________РАЗДЕЛ УСЛУГИ_______________*/
 div.service-text{
@@ -34,7 +72,7 @@ div.success-message{
 	color: red;
 } 
 
-.grey-top{
+div.grey-top{
 	margin-top: 50px;
 	padding: 30px 0 10px;
 	background-color: #f4f4f4;
@@ -42,23 +80,7 @@ div.success-message{
 	font-size: 1.1em;
 	text-align: left;
 
-/* IE10 Consumer Preview  
-background-image: -ms-radial-gradient(right top, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
 
- Mozilla Firefox  
-background-image: -moz-radial-gradient(right top, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
-
- Opera  
-background-image: -o-radial-gradient(right top, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
-
- Webkit (Safari/Chrome 10)  
-background-image: -webkit-gradient(radial, right top, 0, right top, 1011, color-stop(0, #FFFFFF), color-stop(0.5, #DEF9FC), color-stop(1, #C7C4D1));
-
- Webkit (Chrome 11+)  
-background-image: -webkit-radial-gradient(right top, ellipse farthest-corner, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
-
- W3C Markup, IE10 Release Preview  
-background-image*/: radial-gradient(ellipse farthest-corner at right top, #FFFFFF 0%, #DEF9FC 50%, #C7C4D1 100%);
 }
 img.grey-top-brand:hover{
 	opacity:0.75;
