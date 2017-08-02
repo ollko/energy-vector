@@ -44,11 +44,30 @@ div.container.new img{
 /*___________РАЗДЕЛ IMAGEPOOL_____________*/
 
 /*___________РАЗДЕЛ УСЛУГИ_______________*/
-div.service-text{
+
+
+@media screen and (max-width: 750px){
+	div.service-content img {
+
+		display: none;
+	}	
+	div.service-content {
 	font-size: 1.2em;
-	text-align: justify;
+}
+	
+} 
+
+div.service-content {
+	
+    text-align: justify;
+
 }
 
+div.service-content img {
+		
+		height: 350px;
+		margin: 0 1em 1em 0;
+	}
 /*___________/РАЗДЕЛ УСЛУГИ_______________*/
 
 div.success-messages{

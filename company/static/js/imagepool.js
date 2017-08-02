@@ -1,7 +1,9 @@
 function getImageList(url) {
   $.getJSON(url, function(data) {
     var images = $("#imagepool_image_list td.image");
+
     images.empty();
+    
     for (var i = 0; i < data.images.length; i++) {
       $(images.get(i)).append("<a class='insert' href='" +
       data.images[i].src + "'><img src='" + data.images[i].src +
@@ -45,7 +47,9 @@ $(function() {
   var contentField = $("form textarea[name=content]");
   
   $("#imagepool_prev, #imagepool_next").click(function(evt) {
+    
     evt.preventDefault();
+	
     getImageList($(this).attr("href"));
   });
   
