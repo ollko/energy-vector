@@ -5,11 +5,70 @@ div.tag-cloud{
 	display: none;
 }
 }*/
+
+
 /*___________РАЗДЕЛ НОВОСТИ_______________*/
 
-div.container.new img{
-	width: 50%;
+/*@media screen and (max-width: 750px){
+	div.whole-new{
+		font-size: 1.2em;
+		
+	}
+div.container.new img.new-detail{
+	display: none;
 }
+}
+
+a.new-description{
+	color: #333;
+    text-decoration: none;
+    text-align: justify;
+}
+div.container.new img.new-detail{
+	display: block;
+	width: 50%;
+	margin: 1em 0 1em 0;
+
+}
+div.whole-new{		
+		text-align: justify;
+	}	
+}*/
+
+div.whole-new{		
+		text-align: justify;
+	}
+img.news-img{
+	width: 100%;
+}
+
+div.new-photo{
+	background-size: cover;
+	float: left;
+	margin: 0 2vw 1vw 0;
+	height: 20vw;
+	position: relative;
+	top: 3px;
+	transition: all 0.5s;
+	width: 30vw;
+}
+p.new{
+	text-align: justify;
+	color: #333;
+}	
+@media screen and (max-width: 500px){
+div.new-photo {
+    background-image: none;
+    height: 0;
+    margin: 0;
+    width: 0;
+}
+p.new{
+	font-size: 1.2em
+}
+}
+
+  
 /*___________РАЗДЕЛ НОВОСТИ_______________*/
 
 /*___________РАЗДЕЛ IMAGEPOOL_____________*/

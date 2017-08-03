@@ -7,13 +7,15 @@
 {% endblock %}
 
 {% block content %}
-<div class = 'container new'>
+<div class = 'container '>
+	<h2><strong>{{ object.title|upper }}</strong></h2 >
 
-  <h3 class="text-success">{{ object.title }}</h3 class="l">
-  <p class="posted"><em>{{ object.posted|date:"j.m.Y H:i:s" }}</em></p>
+	<p class="new"><small><em>{{ object.posted|date:"j.m.Y H:i:s" }}</em></small></p>	
+	<div class = "new-photo" style="background-image:url({{object.image.url}})"></div>
+			
+			<p class="new">{{ object.content|bbcode|safe }}</p>
 
-  <div>{{ object.content|bbcode|safe }}</div>
-  <br>
-  <p><a href="{% url "news:news_index" %}?page={{ pn }}"><span class="glyphicon glyphicon-chevron-left">Назад</span></a></p>
+			<p><a href="{% url "news:news_index" %}?page={{ pn }}">Назад</a></p>
+		
 </div>
 {% endblock %}

@@ -22,7 +22,7 @@
     <h4 class="lead">ДОБАВИТЬ НОВОСТЬ</h4>
   </div>
   <hr>
-<form  action="" method="post" >
+<form  action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{form|bootstrap}}   
@@ -31,7 +31,6 @@
       <button type="submit" class="btn btn-success">СОХРАНИТЬ</button>
     </div> 
 </form>
-{% include "includes/_file_lister.html" %}
 </div>
 
 

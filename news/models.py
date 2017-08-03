@@ -10,6 +10,9 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from precise_bbcode.fields import BBCodeTextField
 
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
+
 class New(models.Model):
 	title = models.CharField(max_length = 100,unique_for_date = 'posted',
 		verbose_name = "Заголовок")
@@ -23,11 +26,21 @@ class New(models.Model):
 
 	# def get_absolute_url(self):
 	# 	return reverse("news:news_detail", kwargs = {'pk': self.pk})
+	image = ProcessedImageField(verbose_name = 'Картинка',
+											help_text = "Пожалуйста используйте горизонтальное фото",
+											upload_to='new_image',
+											processors= [ResizeToFill(450,300)],
+											format='JPEG',
+											options={'quality': 60},)
 
 	class Meta:
 		ordering = ["-posted"]
 		verbose_name = "новостная статья"
 		verbose_name_plural = "новостные статьи"
+
+def delete(self, *args, **kwargs):
+    self.image.delete(save = False)
+    super(New, self).delete(*args, **kwargs)
 
 # from django.contrib.comments.moderation import CommentModerator, moderator
 

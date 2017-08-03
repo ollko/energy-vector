@@ -8,39 +8,53 @@
 
 {% block content %}
   {% include "includes/_messages.html" %}
-<div class = 'container'>
+<div class = 'container news'>
 <br>
-{% if perms.news.add_new %}
-    <p><a href="{% url "news:news_add" %}"><span class="glyphicon glyphicon-plus">добавить новость</span></a></p>
-  {% endif %}
-  <h3 class="text-success"><b>НОВОСТИ КОМПАНИИ</b></h3>
-  
-
-  {% comment %}
-  <div class="feeds">
-    <a href="{% url "news_feed_rss" %}" target="_blank"><img src="{% static "rss.png" %}"></a>
-    <a href="{% url "news_feed_atom" %}" target="_blank"><img src="{% static "atom.png" %}"></a>
+  <div class="row">
+    <div class="col-md-12">
+      {% if perms.news.add_new %}
+        <p><a href="{% url "news:news_add" %}"><span class="glyphicon glyphicon-plus">добавить новость</span></a></p>
+      {% endif %}
+      </div>
   </div>
-  {% endcomment %}
+<div class="row">
+  <div class="col-md-12">
+     <h3 class="text-success"><b>НОВОСТИ КОМПАНИИ</b></h3>
+     <hr>
+  </div> 
+</div>
+
 
   {% for object in latest %}
-  <div>
-    <h4><a href="{% url "news:news_detail" pk=object.pk %}?page={{ page_obj.number }}">{{ object.title|upper }}</a></h4>
-    <p class="posted"><em>{{ object.posted|date:"j.m.Y H:i:s" }}</em></p>
-    <p>{{ object.description}}</p>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <img class = "news-img" src="{{object.image.url}}">
+    </div>
     
-    <p class="buttons bottom-indent">
-    {% if perms.news.change_new %}
-    <a href="{% url "news:news_edit" pk=object.pk %}?page={{ page_obj.number }}">Изменить</a>
-    {% endif %}
-    {% if perms.news.delete_new %}
-    <a href="{% url "news:news_delete" pk=object.pk %}?page={{ page_obj.number }}">Удалить</a>
-    {% endif %}
-    </p>
-    <hr>
+    <div class="col-md-8 col-sm-12">
+    <div class="news-header">
+      <h4 ><strong>{{ object.title|upper }}</strong></h4>
+      <p class="new"><small><em>{{ object.posted|date:"j.m.Y H:i:s" }}</em></small></p>
+    </div>
+      
+      <a class = 'new' href="{% url "news:news_detail" pk=object.pk %}?page={{ page_obj.number }}"><p class="new">{{ object.description}}</p></a>
+      
+      <p class="buttons bottom-indent">
+      {% if perms.news.change_new %}
+      <a href="{% url "news:news_edit" pk=object.pk %}?page={{ page_obj.number }}">Изменить</a>
+      {% endif %}
+      {% if perms.news.delete_new %}
+      <a href="{% url "news:news_delete" pk=object.pk %}?page={{ page_obj.number }}">Удалить</a>
+      {% endif %}
+      </p>
+      
+    </div>
+    
   </div>
-
+  <hr>
   {% endfor %}
+
+  
   {% include "includes/_pagination.html" %}
 </div>
 {% endblock %}
