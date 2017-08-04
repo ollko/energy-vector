@@ -27,8 +27,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'imagekit',
     'bootstrapform',
     'precise_bbcode',
+    'projects.apps.ProjectsConfig',
     'news.apps.NewsConfig',
     'main.apps.MainConfig',
     'imagepool.apps.ImagepoolConfig',

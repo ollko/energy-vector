@@ -27,7 +27,7 @@ class New(models.Model):
 	# def get_absolute_url(self):
 	# 	return reverse("news:news_detail", kwargs = {'pk': self.pk})
 	image = ProcessedImageField(verbose_name = 'Картинка',
-											help_text = "Пожалуйста используйте горизонтальное фото",
+											help_text = "Будет лучше загрузить landscape фото ",
 											upload_to='new_image',
 											processors= [ResizeToFill(450,300)],
 											format='JPEG',
