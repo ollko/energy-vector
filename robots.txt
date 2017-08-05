@@ -1,0 +1,17 @@
+User-agent: Yandex
+Disallow: /*corr
+Disallow: /*create
+Disallow: /*update
+Disallow: /*delete
+Disallow: /*certificates_new
+Disallow: /*certificate_list_del
+Disallow: /*otzivi_new
+Disallow: /*otziv_corr
+Disallow: /*otziv_del
+Disallow: /imagepool
+Disallow: /call_order
+Disallow: /order
+Disallow: /login
+Disallow: /logout
+Disallow: /*add
+Disallow: /*edit
