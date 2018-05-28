@@ -1,0 +1,20 @@
+{% extends "common/__l_single_col.html" %}
+{% load bbcode_tags %}
+
+{% block title %}
+	{{ block.super }}
+	{{ object.title }}
+{% endblock %}
+
+
+{% block content %}
+	<div class="container">
+		<div class='col-sm-12 col-md-8 col-md-offset-2 post-detail-item'>
+			<h1><small>{{ object.title|upper }}</small></h1 >
+			<p class="new"><small><em>{{ object.timestamp|date:"j.m.Y H:i:s" }}</em></small></p>	
+			{% if object.image %}<img class = "img-responsive" src="{{ object.image.url }}"/>{% endif %}					
+			{{ object.get_markdown }}
+			<p><a href="{% url 'news:news_index' %}?page={{ pn }}">Назад</a></p>
+		</div>
+	</div>	
+{% endblock %}

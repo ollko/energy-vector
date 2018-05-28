@@ -3,23 +3,19 @@
 {% load bbcode_tags %}
 {% block content %}
 
-<div class = 'container'>
+<div class = 'container post-detail-item'>
 <br>
 	<div class="row">
-	<h2>Вы действительно хотите удалить новость?</h2>
-  <h4>{{ object.title }}</h4>
-  <div>{{ object.content|bbcode|safe }}</div>
-  <p class="posted">{{ object.posted|date:"j.m.Y H:i:s" }}</p>
-	</div>
-	<div class="row">
-		<div class="col-sm-2">
+		<div class="col-sm-12 col-md-8 col-md-offset-2 post-detail-item">
+			<h2>Вы действительно хотите удалить эту статью?</h2>
+			<h1>{{ object.title }}</h1>
+			<div>{{ object.get_markdown }}</div>
+			<p class="posted">{{ object.posted|date:"j.m.Y H:i:s" }}</p>
 			<form action="" method="POST">
 				{% csrf_token %}
 				<input class="btn btn-warning" type="submit" action="" value="Да, удалить." />
-			</form>
-		</div>
-		<div class="col-sm-2">
-			<a class="btn btn-default" href="{% url "news:news_index" %}?page={{ pn }}" role="button">Нет, оставить.</a>
+				<a class="btn btn-default" href="{% url "news:news_index" %}?page={{ pn }}" role="button">Нет, оставить.</a>
+			</form>			
 		</div>
 	</div>	
 </div>

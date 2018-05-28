@@ -1,0 +1,56 @@
+{% extends "common/__l_single_col.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  {{ block.super }}
+  Новости
+{% endblock %}
+
+{% block content %}
+  {% include "includes/_messages.html" %}
+<div class = 'container news'>
+<br>
+  <div class="row">
+    <div class="col-md-12">
+      {% if perms.news.add_new %}
+        <p><a href="{% url "news:news_add" %}"><span class="glyphicon glyphicon-plus">добавить новость</span></a></p>
+      {% endif %}
+      </div>
+  </div>
+<div class="row">
+  <div class="col-md-12">
+     <h3 class="text-success"><b>НОВОСТИ КОМПАНИИ</b></h3>
+  </div> 
+</div>
+
+<div class="row">
+  {% for obj in object_list %} 
+    <div class="col-sm-6 post-detail-item" >
+      <div class="thumbnail ">
+          {% if obj.image %}
+           <img src='{{ obj.image.url }}' class='img-responsive' />
+          {% endif %}
+        <div class="caption post-detail-item">
+          {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+          <h1><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h1>
+          <!-- {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %} -->
+          {{ obj.get_markdown|truncatewords_html:2 }}
+          <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">Читать</a></p>
+        </div>
+      </div>
+      <p class="buttons bottom-indent">
+        {% if perms.news.change_new %}
+        <a href="{% url 'news:news_edit' pk=obj.id %}?page={{ page_obj.number }}">Изменить</a>
+        {% endif %}
+        {% if perms.news.delete_new %}
+        <a href="{% url 'news:news_delete' pk=obj.id %}?page={{ page_obj.number }}">Удалить</a>
+        {% endif %}
+      </p>
+    </div>
+  {% cycle '' '</div><div class="row">' %}
+  {% endfor %}
+</div>
+ 
+  {% include "includes/_pagination.html" %}
+</div>
+{% endblock %}

@@ -14,23 +14,37 @@
   
 {% endblock %}
 
+{% block head-extra %}
+  {{ form.media }}
+{% endblock head-extra %}
+
 {% block content%}
 
 <div class = 'container'>
-  <div class="my-form-header">
-    <a href="{% url "news:news_index" %}" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-    <h4 class="lead">ДОБАВИТЬ/РЕДАКТИРОВАТЬ НОВОСТЬ</h4>
-  </div>
-  <hr>
-<form  action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+  <div class="row">
+    <div class="col-sm-6 new-preview post-detail-item">
+      <h4 class="lead">ПРЕДВАРИТЕЛЬНЫЙ ПРОСМОТР</h4>
+      <hr>
+      <h3 id="preview-title"></h3>
+      <p id="preview-content"></p>
+    </div>
+    <div class="col-sm-6">
+       <div class="my-form-header">
+          <a href="{% url "news:news_index" %}" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+          <h4 class="lead">ФОРМА ДЛЯ ЗАПОЛНЕНИЯ</h4>
+        </div>
+        <hr>
+          <form  action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-    {{form|bootstrap}}   
-  <div class="my-form-footer">
-      <a href="{% url "news:news_index" %}" type="button" class="btn btn-default">ЗАКРЫТЬ</a>
-      <button type="submit" class="btn btn-success">СОХРАНИТЬ</button>
-    </div> 
-</form>
+            {{ form.as_p }}   
+            <div class="my-form-footer">
+            <a href="{% url "news:news_index" %}" type="button" class="btn btn-default">ЗАКРЫТЬ</a>
+            <button type="submit" class="btn btn-success">СОХРАНИТЬ</button>
+            </div>
+          </form>
+    </div>
+  </div>
 </div>
 
 

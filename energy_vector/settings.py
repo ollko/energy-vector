@@ -27,17 +27,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'taggit',
-    'imagekit',
-    'bootstrapform',
-    'precise_bbcode',
-    'projects.apps.ProjectsConfig',
-    'news.apps.NewsConfig',
-    'main.apps.MainConfig',
-    'imagepool.apps.ImagepoolConfig',
-    'company.apps.CompanyConfig',
-    'catalog.apps.CatalogConfig',
-    'services.apps.ServicesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +35,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    # Thert party
+    'taggit',
+    'imagekit',
+    'bootstrapform',
+    'precise_bbcode',
+    'pagedown',
+    'markdown_deux',
+    # Local apps
+    'projects.apps.ProjectsConfig',
+    'news.apps.NewsConfig',
+    'main.apps.MainConfig',
+    'imagepool.apps.ImagepoolConfig',
+    'company.apps.CompanyConfig',
+    'catalog.apps.CatalogConfig',
+    'services.apps.ServicesConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
